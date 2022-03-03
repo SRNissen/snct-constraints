@@ -5,32 +5,24 @@
       <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
       <Extensions>cpp;c;cc;cxx;c++;cppm;ixx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
     </Filter>
-    <Filter Include="source">
-      <UniqueIdentifier>{02578481-8e1d-41e9-b2e6-7adb406d0d12}</UniqueIdentifier>
-    </Filter>
-  </ItemGroup>
-  <ItemGroup>
-    <ClInclude Include="..\source\snct_constrained.hpp">
-      <Filter>source</Filter>
-    </ClInclude>
-    <ClInclude Include="..\source\snct_constraints.hpp">
-      <Filter>source</Filter>
-    </ClInclude>
-    <ClInclude Include="..\source\snct_constexpr_math.hpp">
-      <Filter>source</Filter>
-    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="source\basic_functionality.cpp">
       <Filter>test files</Filter>
     </ClCompile>
-    <ClCompile Include="source\individual_constraints.cpp">
+    <ClCompile Include="source\Finite.cpp">
       <Filter>test files</Filter>
     </ClCompile>
     <ClCompile Include="source\math_functions.cpp">
       <Filter>test files</Filter>
     </ClCompile>
     <ClCompile Include="source\template_file.cpp">
+      <Filter>test files</Filter>
+    </ClCompile>
+    <ClCompile Include="source\Not.cpp">
+      <Filter>test files</Filter>
+    </ClCompile>
+    <ClCompile Include="source\comparisons.cpp">
       <Filter>test files</Filter>
     </ClCompile>
   </ItemGroup>
