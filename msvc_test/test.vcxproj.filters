@@ -10,7 +10,7 @@
     <ClCompile Include="source\basic_functionality.cpp">
       <Filter>test files</Filter>
     </ClCompile>
-    <ClCompile Include="source\Finite.cpp">
+    <ClCompile Include="source\constraint_Finite.cpp">
       <Filter>test files</Filter>
     </ClCompile>
     <ClCompile Include="source\math_functions.cpp">
@@ -19,10 +19,10 @@
     <ClCompile Include="source\template_file.cpp">
       <Filter>test files</Filter>
     </ClCompile>
-    <ClCompile Include="source\Not.cpp">
+    <ClCompile Include="source\constraint_Not.cpp">
       <Filter>test files</Filter>
     </ClCompile>
-    <ClCompile Include="source\comparisons.cpp">
+    <ClCompile Include="source\constraint_Comparisons.cpp">
       <Filter>test files</Filter>
     </ClCompile>
   </ItemGroup>

@@ -1,5 +1,6 @@
 #include "CppUnitTest.h"
 #include "snct_constexpr_math.hpp"
+#include "test_doubles.h"
 #include <array>
 #include <utility>
 
@@ -7,16 +8,6 @@ using namespace Microsoft::VisualStudio::CppUnitTestFramework;
 
 namespace math_functions
 {
-    static constexpr double signalling_NaN = std::numeric_limits<double>::signaling_NaN();
-    static constexpr double quiet_NaN = std::numeric_limits<double>::quiet_NaN();
-    static constexpr double positive_infinity  = std::numeric_limits<double>::infinity();
-    static constexpr double negative_infinity  = std::numeric_limits<double>::infinity() * -1.0;
-    static constexpr double positive_lowest  = std::numeric_limits<double>::lowest();
-    static constexpr double negative_lowest  = std::numeric_limits<double>::lowest() * -1.0;
-    static constexpr double minimum  = std::numeric_limits<double>::min();
-    static constexpr double maximum  = std::numeric_limits<double>::max();
-    static constexpr double zero = 0.0;
-    static constexpr double one = 1.0;
 
     TEST_CLASS(snct_constexpr_math_function)
     {
@@ -30,16 +21,16 @@ namespace math_functions
             auto pairs = std::array<std::pair<expected, input>, 10>
             {
                 {
-                    { true, signalling_NaN },
-                    { true, quiet_NaN },
-                    { false,positive_infinity },
-                    { false,negative_infinity },
-                    { false,positive_lowest },
-                    { false,negative_lowest },
-                    { false,minimum },
-                    { false,maximum },
-                    { false,zero },
-                    { false,one }
+                    { true, Doubles.at(DD::signalling_NaN) },
+                    { true, Doubles.at(DD::quiet_NaN) },
+                    { false,Doubles.at(DD::positive_infinity) },
+                    { false,Doubles.at(DD::negative_infinity) },
+                    { false,Doubles.at(DD::positive_lowest) },
+                    { false,Doubles.at(DD::negative_lowest) },
+                    { false,Doubles.at(DD::minimum) },
+                    { false,Doubles.at(DD::maximum) },
+                    { false,Doubles.at(DD::zero) },
+                    { false,Doubles.at(DD::one) }
                 }
             };
 
@@ -57,16 +48,16 @@ namespace math_functions
             auto pairs = std::array<std::pair<expected, input>, 10>
             {
                 {
-                    { false,signalling_NaN },
-                    { false,quiet_NaN },
-                    { true,positive_infinity },
-                    { false,negative_infinity },
-                    { false,positive_lowest },
-                    { false,negative_lowest },
-                    { false,minimum },
-                    { false,maximum },
-                    { false,zero },
-                    { false,one }
+                    { false, Doubles.at(DD::quiet_NaN) },
+                    { false, Doubles.at(DD::signalling_NaN) },
+                    { true,  Doubles.at(DD::positive_infinity) },
+                    { false, Doubles.at(DD::negative_infinity) },
+                    { false, Doubles.at(DD::positive_lowest) },
+                    { false, Doubles.at(DD::negative_lowest) },
+                    { false, Doubles.at(DD::minimum) },
+                    { false, Doubles.at(DD::maximum) },
+                    { false, Doubles.at(DD::zero) },
+                    { false, Doubles.at(DD::one) }
                 }
             };
 
@@ -84,16 +75,16 @@ namespace math_functions
             auto pairs = std::array<std::pair<expected, input>, 10>
             {
                 {
-                    { false, signalling_NaN },
-                    { false,quiet_NaN },
-                    { false,positive_infinity },
-                    { true,negative_infinity },
-                    { false,positive_lowest },
-                    { false,negative_lowest },
-                    { false,minimum },
-                    { false,maximum },
-                    { false,zero },
-                    { false,one }
+                    { false, Doubles.at(DD::signalling_NaN) },
+                    { false, Doubles.at(DD::quiet_NaN) },
+                    { false, Doubles.at(DD::positive_infinity) },
+                    { true,  Doubles.at(DD::negative_infinity) },
+                    { false, Doubles.at(DD::positive_lowest) },
+                    { false, Doubles.at(DD::negative_lowest) },
+                    { false, Doubles.at(DD::minimum) },
+                    { false, Doubles.at(DD::maximum) },
+                    { false, Doubles.at(DD::zero) },
+                    { false, Doubles.at(DD::one) }
                 }
             };
 
@@ -111,16 +102,16 @@ namespace math_functions
             auto pairs = std::array<std::pair<expected, input>, 10>
             {
                 {
-                    { false, signalling_NaN },
-                    { false,quiet_NaN },
-                    { true,positive_infinity },
-                    { true,negative_infinity },
-                    { false,positive_lowest },
-                    { false,negative_lowest },
-                    { false,minimum },
-                    { false,maximum },
-                    { false,zero },
-                    { false,one }
+                    { false, Doubles.at(DD::signalling_NaN) },
+                    { false, Doubles.at(DD::quiet_NaN) },
+                    { true,  Doubles.at(DD::positive_infinity) },
+                    { true,  Doubles.at(DD::negative_infinity) },
+                    { false, Doubles.at(DD::positive_lowest) },
+                    { false, Doubles.at(DD::negative_lowest) },
+                    { false, Doubles.at(DD::minimum) },
+                    { false, Doubles.at(DD::maximum) },
+                    { false, Doubles.at(DD::zero) },
+                    { false, Doubles.at(DD::one) }
                 }
             };
 
@@ -138,16 +129,16 @@ namespace math_functions
             auto pairs = std::array<std::pair<expected, input>, 10>
             {
                 {
-                    { false, signalling_NaN },
-                    { false,quiet_NaN },
-                    { false,positive_infinity },
-                    { false,negative_infinity },
-                    { true,positive_lowest },
-                    { true,negative_lowest },
-                    { true,minimum },
-                    { true,maximum },
-                    { true,zero },
-                    { true,one }
+                    { false, Doubles.at(DD::signalling_NaN) },
+                    { false, Doubles.at(DD::quiet_NaN) },
+                    { false, Doubles.at(DD::positive_infinity) },
+                    { false, Doubles.at(DD::negative_infinity) },
+                    { true,  Doubles.at(DD::positive_lowest) },
+                    { true,  Doubles.at(DD::negative_lowest) },
+                    { true,  Doubles.at(DD::minimum) },
+                    { true,  Doubles.at(DD::maximum) },
+                    { true,  Doubles.at(DD::zero) },
+                    { true,  Doubles.at(DD::one) }
                 }
             };
 

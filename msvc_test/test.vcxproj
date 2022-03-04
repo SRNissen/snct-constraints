@@ -60,9 +60,9 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="source\basic_functionality.cpp" />
-    <ClCompile Include="source\comparisons.cpp" />
-    <ClCompile Include="source\Finite.cpp" />
-    <ClCompile Include="source\Not.cpp" />
+    <ClCompile Include="source\constraint_Comparisons.cpp" />
+    <ClCompile Include="source\constraint_Finite.cpp" />
+    <ClCompile Include="source\constraint_Not.cpp" />
     <ClCompile Include="source\math_functions.cpp" />
     <ClCompile Include="source\template_file.cpp" />
   </ItemGroup>
