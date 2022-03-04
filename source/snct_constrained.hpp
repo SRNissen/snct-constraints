@@ -62,15 +62,17 @@ namespace snct
 
 
     template<typename T, Constraint<T> ... constraint>
-    [[nodiscard]] inline static constexpr std::optional<Constrained<T, constraint ...>> Constrained<T, constraint ...>::factory(T t) noexcept
+    [[nodiscard]] inline constexpr std::optional<Constrained<T, constraint ...>> Constrained<T, constraint ...>::factory(T t) noexcept
     {
-        bool all_satisfied = true;
-        ((constraint::is_satisfied(t) ? void(0) : all_satisfied = false), ...);
+        // bool all_satisfied = true;
+        // ((constraint::is_satisfied(t) ? true : (all_satisfied = false)), ...);
+
+        bool const all_satisfied = ((constraint::is_satisfied(t) ? true : false), ...);
 
         if (all_satisfied)
             return Constrained{ t, Factoryparam{} };
         else
-            return std::nullopt_t;
+            return std::nullopt;
     }
 
 

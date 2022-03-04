@@ -66,6 +66,10 @@
     <ClCompile Include="source\math_functions.cpp" />
     <ClCompile Include="source\template_file.cpp" />
   </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="source\test_constraints.h" />
+    <ClInclude Include="source\test_doubles.h" />
+  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>

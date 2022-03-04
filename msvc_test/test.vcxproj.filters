@@ -1,29 +1,40 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <Filter Include="test files">
+    <Filter Include="test headers">
+      <UniqueIdentifier>{4bb52092-8981-4cc1-872b-e47fc6134401}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="test source">
       <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
       <Extensions>cpp;c;cc;cxx;c++;cppm;ixx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
     </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="source\basic_functionality.cpp">
-      <Filter>test files</Filter>
+      <Filter>test source</Filter>
     </ClCompile>
     <ClCompile Include="source\constraint_Finite.cpp">
-      <Filter>test files</Filter>
+      <Filter>test source</Filter>
     </ClCompile>
     <ClCompile Include="source\math_functions.cpp">
-      <Filter>test files</Filter>
+      <Filter>test source</Filter>
     </ClCompile>
     <ClCompile Include="source\template_file.cpp">
-      <Filter>test files</Filter>
+      <Filter>test source</Filter>
     </ClCompile>
     <ClCompile Include="source\constraint_Not.cpp">
-      <Filter>test files</Filter>
+      <Filter>test source</Filter>
     </ClCompile>
     <ClCompile Include="source\constraint_Comparisons.cpp">
-      <Filter>test files</Filter>
+      <Filter>test source</Filter>
     </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="source\test_doubles.h">
+      <Filter>test headers</Filter>
+    </ClInclude>
+    <ClInclude Include="source\test_constraints.h">
+      <Filter>test headers</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>
