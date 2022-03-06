@@ -6,147 +6,641 @@
 
 using namespace Microsoft::VisualStudio::CppUnitTestFramework;
 
-namespace math_functions
+namespace constexpr_math_function
 {
+	namespace is_nan
+	{
+		TEST_CLASS(returns_true)
+		{
+			TEST_METHOD(on_signalling_NaN) {
+				//Arrange
+				const auto expected_returnvalue = true;
+				const auto input_value = Doubles.at(DD::signalling_NaN);
 
-    TEST_CLASS(snct_constexpr_math_function)
-    {
-    public:
+				//Act
+				auto actual_returnvalue = snct::is_nan(input_value);
 
-        TEST_METHOD(is_nan_returns_EXPECTED_on_INPUT)
-        {
+				//Assert
+				Assert::AreEqual(expected_returnvalue, actual_returnvalue);
+			}
+			TEST_METHOD(on_quiet_NaN) {
+				//Arrange
+				const auto expected_returnvalue = true;
+				const auto input_value = Doubles.at(DD::quiet_NaN);
 
-            using expected = bool;
-            using input = double;
-            auto pairs = std::array<std::pair<expected, input>, 10>
-            {
-                {
-                    { true, Doubles.at(DD::signalling_NaN) },
-                    { true, Doubles.at(DD::quiet_NaN) },
-                    { false,Doubles.at(DD::positive_infinity) },
-                    { false,Doubles.at(DD::negative_infinity) },
-                    { false,Doubles.at(DD::positive_lowest) },
-                    { false,Doubles.at(DD::negative_lowest) },
-                    { false,Doubles.at(DD::minimum) },
-                    { false,Doubles.at(DD::maximum) },
-                    { false,Doubles.at(DD::zero) },
-                    { false,Doubles.at(DD::one) }
-                }
-            };
+				//Act
+				auto actual_returnvalue = snct::is_nan(input_value);
 
-            for (auto const & [expected, input] : pairs)
-            {
-                Assert::AreEqual(expected, snct::is_nan(input));
-            }
-        }
+				//Assert
+				Assert::AreEqual(expected_returnvalue, actual_returnvalue);
+			}
+		};
 
-        TEST_METHOD(is_positive_infinite_returns_EXPECTED_on_INPUT)
-        {
+		TEST_CLASS(returns_false)
+		{
+			TEST_METHOD(on_positive_infinity) {
+				//Arrange
+				const auto expected_returnvalue = false;
+				const auto input_value = Doubles.at(DD::positive_infinity);
 
-            using expected = bool;
-            using input = double;
-            auto pairs = std::array<std::pair<expected, input>, 10>
-            {
-                {
-                    { false, Doubles.at(DD::quiet_NaN) },
-                    { false, Doubles.at(DD::signalling_NaN) },
-                    { true,  Doubles.at(DD::positive_infinity) },
-                    { false, Doubles.at(DD::negative_infinity) },
-                    { false, Doubles.at(DD::positive_lowest) },
-                    { false, Doubles.at(DD::negative_lowest) },
-                    { false, Doubles.at(DD::minimum) },
-                    { false, Doubles.at(DD::maximum) },
-                    { false, Doubles.at(DD::zero) },
-                    { false, Doubles.at(DD::one) }
-                }
-            };
+				//Act
+				auto actual_returnvalue = snct::is_nan(input_value);
 
-            for (auto const& [expected, input] : pairs)
-            {
-                Assert::AreEqual(expected, snct::is_positive_infinite(input));
-            }
-        }
+				//Assert
+				Assert::AreEqual(expected_returnvalue, actual_returnvalue);
+			}
 
-        TEST_METHOD(is_negative_infinite_returns_EXPECTED_on_INPUT)
-        {
+			TEST_METHOD(on_negative_infinity) {
+				//Arrange
+				const auto expected_returnvalue = false;
+				const auto input_value = Doubles.at(DD::negative_infinity);
 
-            using expected = bool;
-            using input = double;
-            auto pairs = std::array<std::pair<expected, input>, 10>
-            {
-                {
-                    { false, Doubles.at(DD::signalling_NaN) },
-                    { false, Doubles.at(DD::quiet_NaN) },
-                    { false, Doubles.at(DD::positive_infinity) },
-                    { true,  Doubles.at(DD::negative_infinity) },
-                    { false, Doubles.at(DD::positive_lowest) },
-                    { false, Doubles.at(DD::negative_lowest) },
-                    { false, Doubles.at(DD::minimum) },
-                    { false, Doubles.at(DD::maximum) },
-                    { false, Doubles.at(DD::zero) },
-                    { false, Doubles.at(DD::one) }
-                }
-            };
+				//Act
+				auto actual_returnvalue = snct::is_nan(input_value);
 
-            for (auto const& [expected, input] : pairs)
-            {
-                Assert::AreEqual(expected, snct::is_negative_infinite(input));
-            }
-        }
+				//Assert
+				Assert::AreEqual(expected_returnvalue, actual_returnvalue);
+			}
 
-        TEST_METHOD(is_infinite_returns_EXPECTED_on_INPUT)
-        {
+			TEST_METHOD(on_positive_lowest) {
+				//Arrange
+				const auto expected_returnvalue = false;
+				const auto input_value = Doubles.at(DD::positive_lowest);
 
-            using expected = bool;
-            using input = double;
-            auto pairs = std::array<std::pair<expected, input>, 10>
-            {
-                {
-                    { false, Doubles.at(DD::signalling_NaN) },
-                    { false, Doubles.at(DD::quiet_NaN) },
-                    { true,  Doubles.at(DD::positive_infinity) },
-                    { true,  Doubles.at(DD::negative_infinity) },
-                    { false, Doubles.at(DD::positive_lowest) },
-                    { false, Doubles.at(DD::negative_lowest) },
-                    { false, Doubles.at(DD::minimum) },
-                    { false, Doubles.at(DD::maximum) },
-                    { false, Doubles.at(DD::zero) },
-                    { false, Doubles.at(DD::one) }
-                }
-            };
+				//Act
+				auto actual_returnvalue = snct::is_nan(input_value);
 
-            for (auto const& [expected, input] : pairs)
-            {
-                Assert::AreEqual(expected, snct::is_infinite(input));
-            }
-        }
+				//Assert
+				Assert::AreEqual(expected_returnvalue, actual_returnvalue);
+			}
 
-        TEST_METHOD(is_finite_returns_EXPECTED_on_INPUT)
-        {
+			TEST_METHOD(on_negative_lowest) {
+				//Arrange
+				const auto expected_returnvalue = false;
+				const auto input_value = Doubles.at(DD::negative_lowest);
 
-            using expected = bool;
-            using input = double;
-            auto pairs = std::array<std::pair<expected, input>, 10>
-            {
-                {
-                    { false, Doubles.at(DD::signalling_NaN) },
-                    { false, Doubles.at(DD::quiet_NaN) },
-                    { false, Doubles.at(DD::positive_infinity) },
-                    { false, Doubles.at(DD::negative_infinity) },
-                    { true,  Doubles.at(DD::positive_lowest) },
-                    { true,  Doubles.at(DD::negative_lowest) },
-                    { true,  Doubles.at(DD::minimum) },
-                    { true,  Doubles.at(DD::maximum) },
-                    { true,  Doubles.at(DD::zero) },
-                    { true,  Doubles.at(DD::one) }
-                }
-            };
+				//Act
+				auto actual_returnvalue = snct::is_nan(input_value);
 
-            for (auto const& [expected, input] : pairs)
-            {
-                Assert::AreEqual(expected, snct::is_finite(input));
-            }
-        }
+				//Assert
+				Assert::AreEqual(expected_returnvalue, actual_returnvalue);
+			}
 
-    };
+			TEST_METHOD(on_minimum) {
+				//Arrange
+				const auto expected_returnvalue = false;
+				const auto input_value = Doubles.at(DD::minimum);
+
+				//Act
+				auto actual_returnvalue = snct::is_nan(input_value);
+
+				//Assert
+				Assert::AreEqual(expected_returnvalue, actual_returnvalue);
+			}
+
+			TEST_METHOD(on_maximum) {
+				//Arrange
+				const auto expected_returnvalue = false;
+				const auto input_value = Doubles.at(DD::maximum);
+
+				//Act
+				auto actual_returnvalue = snct::is_nan(input_value);
+
+				//Assert
+				Assert::AreEqual(expected_returnvalue, actual_returnvalue);
+			}
+
+			TEST_METHOD(on_zero) {
+				//Arrange
+				const auto expected_returnvalue = false;
+				const auto input_value = Doubles.at(DD::zero);
+
+				//Act
+				auto actual_returnvalue = snct::is_nan(input_value);
+
+				//Assert
+				Assert::AreEqual(expected_returnvalue, actual_returnvalue);
+			}
+
+			TEST_METHOD(on_one) {
+				//Arrange
+				const auto expected_returnvalue = false;
+				const auto input_value = Doubles.at(DD::one);
+
+				//Act
+				auto actual_returnvalue = snct::is_nan(input_value);
+
+				//Assert
+				Assert::AreEqual(expected_returnvalue, actual_returnvalue);
+			}
+		};
+	}
+
+	namespace is_positive_infinite
+	{
+		TEST_CLASS(returns_true)
+		{
+			TEST_METHOD(on_positive_infinity) {
+				//Arrange
+				const auto expected_returnvalue = true;
+				const auto input_value = Doubles.at(DD::positive_infinity);
+
+				//Act
+				auto actual_returnvalue = snct::is_positive_infinite(input_value);
+
+				//Assert
+				Assert::AreEqual(expected_returnvalue, actual_returnvalue);
+			}
+		};
+
+		TEST_CLASS(returns_false)
+		{
+			TEST_METHOD(on_quiet_NaN) {
+				//Arrange
+				const auto expected_returnvalue = false;
+				const auto input_value = Doubles.at(DD::quiet_NaN);
+
+				//Act
+				auto actual_returnvalue = snct::is_positive_infinite(input_value);
+
+				//Assert
+				Assert::AreEqual(expected_returnvalue, actual_returnvalue);
+			}
+
+			TEST_METHOD(on_signalling_NaN) {
+				//Arrange
+				const auto expected_returnvalue = false;
+				const auto input_value = Doubles.at(DD::signalling_NaN);
+
+				//Act
+				auto actual_returnvalue = snct::is_positive_infinite(input_value);
+
+				//Assert
+				Assert::AreEqual(expected_returnvalue, actual_returnvalue);
+			}
+
+			TEST_METHOD(on_negative_infinity) {
+				//Arrange
+				const auto expected_returnvalue = false;
+				const auto input_value = Doubles.at(DD::negative_infinity);
+
+				//Act
+				auto actual_returnvalue = snct::is_positive_infinite(input_value);
+
+				//Assert
+				Assert::AreEqual(expected_returnvalue, actual_returnvalue);
+			}
+
+			TEST_METHOD(on_positive_lowest) {
+				//Arrange
+				const auto expected_returnvalue = false;
+				const auto input_value = Doubles.at(DD::positive_lowest);
+
+				//Act
+				auto actual_returnvalue = snct::is_positive_infinite(input_value);
+
+				//Assert
+				Assert::AreEqual(expected_returnvalue, actual_returnvalue);
+			}
+
+			TEST_METHOD(on_negative_lowest) {
+				//Arrange
+				const auto expected_returnvalue = false;
+				const auto input_value = Doubles.at(DD::negative_lowest);
+
+				//Act
+				auto actual_returnvalue = snct::is_positive_infinite(input_value);
+
+				//Assert
+				Assert::AreEqual(expected_returnvalue, actual_returnvalue);
+			}
+
+			TEST_METHOD(on_minimum) {
+				//Arrange
+				const auto expected_returnvalue = false;
+				const auto input_value = Doubles.at(DD::minimum);
+
+				//Act
+				auto actual_returnvalue = snct::is_positive_infinite(input_value);
+
+				//Assert
+				Assert::AreEqual(expected_returnvalue, actual_returnvalue);
+			}
+
+			TEST_METHOD(on_maximum) {
+				//Arrange
+				const auto expected_returnvalue = false;
+				const auto input_value = Doubles.at(DD::maximum);
+
+				//Act
+				auto actual_returnvalue = snct::is_positive_infinite(input_value);
+
+				//Assert
+				Assert::AreEqual(expected_returnvalue, actual_returnvalue);
+			}
+
+			TEST_METHOD(on_zero) {
+				//Arrange
+				const auto expected_returnvalue = false;
+				const auto input_value = Doubles.at(DD::zero);
+
+				//Act
+				auto actual_returnvalue = snct::is_positive_infinite(input_value);
+
+				//Assert
+				Assert::AreEqual(expected_returnvalue, actual_returnvalue);
+			}
+
+			TEST_METHOD(on_one) {
+				//Arrange
+				const auto expected_returnvalue = false;
+				const auto input_value = Doubles.at(DD::one);
+
+				//Act
+				auto actual_returnvalue = snct::is_positive_infinite(input_value);
+
+				//Assert
+				Assert::AreEqual(expected_returnvalue, actual_returnvalue);
+			}
+		};
+	}
+
+	namespace is_negative_infinite
+	{
+		TEST_CLASS(returns_true)
+		{
+			TEST_METHOD(on_negative_infinity) {
+				//Arrange
+				const auto expected_returnvalue = true;
+				const auto input_value = Doubles.at(DD::negative_infinity);
+
+				//Act
+				auto actual_returnvalue = snct::is_negative_infinite(input_value);
+
+				//Assert
+				Assert::AreEqual(expected_returnvalue, actual_returnvalue);
+			}
+		};
+
+		TEST_CLASS(returns_false)
+		{
+			TEST_METHOD(on_quiet_NaN) {
+				//Arrange
+				const auto expected_returnvalue = false;
+				const auto input_value = Doubles.at(DD::quiet_NaN);
+
+				//Act
+				auto actual_returnvalue = snct::is_negative_infinite(input_value);
+
+				//Assert
+				Assert::AreEqual(expected_returnvalue, actual_returnvalue);
+			}
+
+			TEST_METHOD(on_signalling_NaN) {
+				//Arrange
+				const auto expected_returnvalue = false;
+				const auto input_value = Doubles.at(DD::signalling_NaN);
+
+				//Act
+				auto actual_returnvalue = snct::is_negative_infinite(input_value);
+
+				//Assert
+				Assert::AreEqual(expected_returnvalue, actual_returnvalue);
+			}
+
+			TEST_METHOD(on_positive_infinity) {
+				//Arrange
+				const auto expected_returnvalue = false;
+				const auto input_value = Doubles.at(DD::positive_infinity);
+
+				//Act
+				auto actual_returnvalue = snct::is_negative_infinite(input_value);
+
+				//Assert
+				Assert::AreEqual(expected_returnvalue, actual_returnvalue);
+			}
+
+			TEST_METHOD(on_positive_lowest) {
+				//Arrange
+				const auto expected_returnvalue = false;
+				const auto input_value = Doubles.at(DD::positive_lowest);
+
+				//Act
+				auto actual_returnvalue = snct::is_negative_infinite(input_value);
+
+				//Assert
+				Assert::AreEqual(expected_returnvalue, actual_returnvalue);
+			}
+
+			TEST_METHOD(on_negative_lowest) {
+				//Arrange
+				const auto expected_returnvalue = false;
+				const auto input_value = Doubles.at(DD::negative_lowest);
+
+				//Act
+				auto actual_returnvalue = snct::is_negative_infinite(input_value);
+
+				//Assert
+				Assert::AreEqual(expected_returnvalue, actual_returnvalue);
+			}
+
+			TEST_METHOD(on_minimum) {
+				//Arrange
+				const auto expected_returnvalue = false;
+				const auto input_value = Doubles.at(DD::minimum);
+
+				//Act
+				auto actual_returnvalue = snct::is_negative_infinite(input_value);
+
+				//Assert
+				Assert::AreEqual(expected_returnvalue, actual_returnvalue);
+			}
+
+			TEST_METHOD(on_maximum) {
+				//Arrange
+				const auto expected_returnvalue = false;
+				const auto input_value = Doubles.at(DD::maximum);
+
+				//Act
+				auto actual_returnvalue = snct::is_negative_infinite(input_value);
+
+				//Assert
+				Assert::AreEqual(expected_returnvalue, actual_returnvalue);
+			}
+
+			TEST_METHOD(on_zero) {
+				//Arrange
+				const auto expected_returnvalue = false;
+				const auto input_value = Doubles.at(DD::zero);
+
+				//Act
+				auto actual_returnvalue = snct::is_negative_infinite(input_value);
+
+				//Assert
+				Assert::AreEqual(expected_returnvalue, actual_returnvalue);
+			}
+
+			TEST_METHOD(on_one) {
+				//Arrange
+				const auto expected_returnvalue = false;
+				const auto input_value = Doubles.at(DD::one);
+
+				//Act
+				auto actual_returnvalue = snct::is_negative_infinite(input_value);
+
+				//Assert
+				Assert::AreEqual(expected_returnvalue, actual_returnvalue);
+			}
+		};
+	}
+
+	namespace is_infinite
+	{
+		TEST_CLASS(returns_true)
+		{
+			TEST_METHOD(on_positive_infinity) {
+				//Arrange
+				const auto expected_returnvalue = true;
+				const auto input_value = Doubles.at(DD::positive_infinity);
+
+				//Act
+				auto actual_returnvalue = snct::is_infinite(input_value);
+
+				//Assert
+				Assert::AreEqual(expected_returnvalue, actual_returnvalue);
+			}
+			TEST_METHOD(on_negative_infinity) {
+				//Arrange
+				const auto expected_returnvalue = true;
+				const auto input_value = Doubles.at(DD::negative_infinity);
+
+				//Act
+				auto actual_returnvalue = snct::is_infinite(input_value);
+
+				//Assert
+				Assert::AreEqual(expected_returnvalue, actual_returnvalue);
+			}
+		};
+
+		TEST_CLASS(returns_false)
+		{
+			TEST_METHOD(on_signalling_NaN) {
+				//Arrange
+				const auto expected_returnvalue = false;
+				const auto input_value = Doubles.at(DD::signalling_NaN);
+
+				//Act
+				auto actual_returnvalue = snct::is_infinite(input_value);
+
+				//Assert
+				Assert::AreEqual(expected_returnvalue, actual_returnvalue);
+			}
+			TEST_METHOD(on_quiet_NaN) {
+				//Arrange
+				const auto expected_returnvalue = false;
+				const auto input_value = Doubles.at(DD::quiet_NaN);
+
+				//Act
+				auto actual_returnvalue = snct::is_infinite(input_value);
+
+				//Assert
+				Assert::AreEqual(expected_returnvalue, actual_returnvalue);
+			}
+			TEST_METHOD(on_positive_lowest) {
+				//Arrange
+				const auto expected_returnvalue = false;
+				const auto input_value = Doubles.at(DD::positive_lowest);
+
+				//Act
+				auto actual_returnvalue = snct::is_infinite(input_value);
+
+				//Assert
+				Assert::AreEqual(expected_returnvalue, actual_returnvalue);
+			}
+			TEST_METHOD(on_negative_lowest) {
+				//Arrange
+				const auto expected_returnvalue = false;
+				const auto input_value = Doubles.at(DD::negative_lowest);
+
+				//Act
+				auto actual_returnvalue = snct::is_infinite(input_value);
+
+				//Assert
+				Assert::AreEqual(expected_returnvalue, actual_returnvalue);
+			}
+			TEST_METHOD(on_minimum) {
+				//Arrange
+				const auto expected_returnvalue = false;
+				const auto input_value = Doubles.at(DD::minimum);
+
+				//Act
+				auto actual_returnvalue = snct::is_infinite(input_value);
+
+				//Assert
+				Assert::AreEqual(expected_returnvalue, actual_returnvalue);
+			}
+			TEST_METHOD(on_maximum) {
+				//Arrange
+				const auto expected_returnvalue = false;
+				const auto input_value = Doubles.at(DD::maximum);
+
+				//Act
+				auto actual_returnvalue = snct::is_infinite(input_value);
+
+				//Assert
+				Assert::AreEqual(expected_returnvalue, actual_returnvalue);
+			}
+			TEST_METHOD(on_zero) {
+				//Arrange
+				const auto expected_returnvalue = false;
+				const auto input_value = Doubles.at(DD::zero);
+
+				//Act
+				auto actual_returnvalue = snct::is_infinite(input_value);
+
+				//Assert
+				Assert::AreEqual(expected_returnvalue, actual_returnvalue);
+			}
+			TEST_METHOD(on_one) {
+				//Arrange
+				const auto expected_returnvalue = false;
+				const auto input_value = Doubles.at(DD::one);
+
+				//Act
+				auto actual_returnvalue = snct::is_infinite(input_value);
+
+				//Assert
+				Assert::AreEqual(expected_returnvalue, actual_returnvalue);
+			}
+		};
+	}
+	namespace is_finite
+	{
+		TEST_CLASS(returns_true)
+		{
+			TEST_METHOD(on_positive_lowest) {
+				//Arrange
+				const auto expected_returnvalue = true;
+				const auto input_value = Doubles.at(DD::positive_lowest);
+
+				//Act
+				auto actual_returnvalue = snct::is_finite(input_value);
+
+				//Assert
+				Assert::AreEqual(expected_returnvalue, actual_returnvalue);
+			}
+
+			TEST_METHOD(on_negative_lowest) {
+				//Arrange
+				const auto expected_returnvalue = true;
+				const auto input_value = Doubles.at(DD::negative_lowest);
+
+				//Act
+				auto actual_returnvalue = snct::is_finite(input_value);
+
+				//Assert
+				Assert::AreEqual(expected_returnvalue, actual_returnvalue);
+			}
+
+			TEST_METHOD(on_minimum) {
+				//Arrange
+				const auto expected_returnvalue = true;
+				const auto input_value = Doubles.at(DD::minimum);
+
+				//Act
+				auto actual_returnvalue = snct::is_finite(input_value);
+
+				//Assert
+				Assert::AreEqual(expected_returnvalue, actual_returnvalue);
+			}
+
+			TEST_METHOD(on_maximum) {
+				//Arrange
+				const auto expected_returnvalue = true;
+				const auto input_value = Doubles.at(DD::maximum);
+
+				//Act
+				auto actual_returnvalue = snct::is_finite(input_value);
+
+				//Assert
+				Assert::AreEqual(expected_returnvalue, actual_returnvalue);
+			}
+
+			TEST_METHOD(on_zero) {
+				//Arrange
+				const auto expected_returnvalue = true;
+				const auto input_value = Doubles.at(DD::zero);
+
+				//Act
+				auto actual_returnvalue = snct::is_finite(input_value);
+
+				//Assert
+				Assert::AreEqual(expected_returnvalue, actual_returnvalue);
+			}
+
+			TEST_METHOD(on_one) {
+				//Arrange
+				const auto expected_returnvalue = true;
+				const auto input_value = Doubles.at(DD::one);
+
+				//Act
+				auto actual_returnvalue = snct::is_finite(input_value);
+
+				//Assert
+				Assert::AreEqual(expected_returnvalue, actual_returnvalue);
+			}
+		};
+
+		TEST_CLASS(returns_false)
+		{
+			TEST_METHOD(on_signalling_NaN) {
+				//Arrange
+				const auto expected_returnvalue = false;
+				const auto input_value = Doubles.at(DD::signalling_NaN);
+
+				//Act
+				auto actual_returnvalue = snct::is_finite(input_value);
+
+				//Assert
+				Assert::AreEqual(expected_returnvalue, actual_returnvalue);
+			}
+
+			TEST_METHOD(on_quiet_NaN) {
+				//Arrange
+				const auto expected_returnvalue = false;
+				const auto input_value = Doubles.at(DD::quiet_NaN);
+
+				//Act
+				auto actual_returnvalue = snct::is_finite(input_value);
+
+				//Assert
+				Assert::AreEqual(expected_returnvalue, actual_returnvalue);
+			}
+
+			TEST_METHOD(on_positive_infinity) {
+				//Arrange
+				const auto expected_returnvalue = false;
+				const auto input_value = Doubles.at(DD::positive_infinity);
+
+				//Act
+				auto actual_returnvalue = snct::is_finite(input_value);
+
+				//Assert
+				Assert::AreEqual(expected_returnvalue, actual_returnvalue);
+			}
+
+			TEST_METHOD(on_negative_infinity) {
+				//Arrange
+				const auto expected_returnvalue = false;
+				const auto input_value = Doubles.at(DD::negative_infinity);
+
+				//Act
+				auto actual_returnvalue = snct::is_finite(input_value);
+
+				//Assert
+				Assert::AreEqual(expected_returnvalue, actual_returnvalue);
+			}
+
+		};
+	}
 }

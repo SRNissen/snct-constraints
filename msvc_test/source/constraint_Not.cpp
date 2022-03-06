@@ -4,7 +4,7 @@
 
 using namespace Microsoft::VisualStudio::CppUnitTestFramework;
 
-namespace individual_constraint::Not::Nullptr
+namespace constraint::Not::Nullptr
 {
     TEST_CLASS(is_satisfied_when_called_with)
     {
@@ -30,7 +30,7 @@ namespace individual_constraint::Not::Nullptr
     };
 }
 
-namespace individual_constraint::Not::NaN
+namespace constraint::Not::NaN
 {
     TEST_CLASS(is_satisfied_when_called_with_NotNaN_value) {
 
@@ -78,7 +78,7 @@ namespace individual_constraint::Not::NaN
     };
 }
 
-namespace individual_constraint::Not::SevenPointFive
+namespace constraint::Not::SevenPointFive
 {
     static constexpr double sevenPointFive = 7.5; // any arbitrary value that isn't nullptr or NaN
 

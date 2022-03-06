@@ -8,7 +8,7 @@ namespace {
 	static constexpr int integerSeven = 7;
 }
 
-namespace individual_constraint::LessThan::IntegerSeven
+namespace constraint::LessThan::IntegerSeven
 {
 
 
@@ -61,7 +61,7 @@ namespace individual_constraint::LessThan::IntegerSeven
 
 
 
-namespace individual_constraint::GreaterThan::IntegerSeven
+namespace constraint::GreaterThan::IntegerSeven
 {
 
 
@@ -118,7 +118,7 @@ namespace individual_constraint::GreaterThan::IntegerSeven
 
 
 
-namespace individual_constraint::Minimum::IntegerSeven
+namespace constraint::Minimum::IntegerSeven
 {
 	
 
@@ -177,7 +177,7 @@ namespace individual_constraint::Minimum::IntegerSeven
 
 
 
-namespace individual_constraint::Maximum::IntegerSeven
+namespace constraint::Maximum::IntegerSeven
 {
 
 
