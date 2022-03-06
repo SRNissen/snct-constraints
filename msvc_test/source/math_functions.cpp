@@ -8,7 +8,7 @@ using namespace Microsoft::VisualStudio::CppUnitTestFramework;
 
 namespace constexpr_math_function
 {
-	namespace is_nan 
+	namespace is_nan
 	{
 		TEST_CLASS(returns_true)
 		{
