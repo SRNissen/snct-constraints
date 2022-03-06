@@ -6,14 +6,13 @@
 
 using namespace Microsoft::VisualStudio::CppUnitTestFramework;
 
-namespace math_functions
+namespace constexpr_math_function
 {
-
-    TEST_CLASS(snct_constexpr_math_function)
+    TEST_CLASS(is_nan)
     {
     public:
 
-        TEST_METHOD(is_nan_returns_EXPECTED_on_INPUT)
+        TEST_METHOD(returns_EXPECTED_on_INPUT)
         {
 
             using expected = bool;
@@ -39,8 +38,10 @@ namespace math_functions
                 Assert::AreEqual(expected, snct::is_nan(input));
             }
         }
-
-        TEST_METHOD(is_positive_infinite_returns_EXPECTED_on_INPUT)
+    };
+    TEST_CLASS(is_positive_infinite)
+    {
+        TEST_METHOD(returns_EXPECTED_on_INPUT)
         {
 
             using expected = bool;
@@ -66,8 +67,10 @@ namespace math_functions
                 Assert::AreEqual(expected, snct::is_positive_infinite(input));
             }
         }
-
-        TEST_METHOD(is_negative_infinite_returns_EXPECTED_on_INPUT)
+    };
+    TEST_CLASS(is_negative_infinite)
+    {
+        TEST_METHOD(returns_EXPECTED_on_INPUT)
         {
 
             using expected = bool;
@@ -93,8 +96,10 @@ namespace math_functions
                 Assert::AreEqual(expected, snct::is_negative_infinite(input));
             }
         }
-
-        TEST_METHOD(is_infinite_returns_EXPECTED_on_INPUT)
+    };
+    TEST_CLASS(is_infinite)
+    {
+        TEST_METHOD(returns_EXPECTED_on_INPUT)
         {
 
             using expected = bool;
@@ -120,8 +125,10 @@ namespace math_functions
                 Assert::AreEqual(expected, snct::is_infinite(input));
             }
         }
-
-        TEST_METHOD(is_finite_returns_EXPECTED_on_INPUT)
+    };
+    TEST_CLASS(is_finite)
+    {
+        TEST_METHOD(returns_EXPECTED_on_INPUT)
         {
 
             using expected = bool;
@@ -147,6 +154,5 @@ namespace math_functions
                 Assert::AreEqual(expected, snct::is_finite(input));
             }
         }
-
     };
 }

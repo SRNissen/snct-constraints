@@ -4,7 +4,7 @@
 
 using namespace Microsoft::VisualStudio::CppUnitTestFramework;
 
-namespace individual_constraint::Finite
+namespace constraint::Finite
 {
     TEST_CLASS(is_satisfied_when_called_with_finite_value) {
         TEST_METHOD(double_maximum) {
