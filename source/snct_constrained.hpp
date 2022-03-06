@@ -27,7 +27,7 @@ namespace snct
 
         Constrained() = delete;
 
-        [[nodiscard]] constexpr operator T() const { return underlying_; }
+        [[nodiscard]] constexpr operator T const & () const { return underlying_; }
 
         constexpr Constrained(T t); // throws on constraint violation
 
@@ -37,7 +37,6 @@ namespace snct
         class Factoryparam {};
         constexpr Constrained(T t, Factoryparam) : underlying_{ t } {};
         T underlying_;
-
     };
 
 
