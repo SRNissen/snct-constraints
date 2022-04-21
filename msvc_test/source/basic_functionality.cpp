@@ -162,8 +162,33 @@ namespace snct_constrained
 			Assert::IsTrue(ctor_threw_snct_ConstraintException);
 			Assert::IsFalse(ctor_threw_other_exception);
 		}
-	};
 
+
+		TEST_METHOD(when_any_constraint_is_not_satisfied_even_if_the_last_constraint_is_satisfied) {
+
+			// Arrange
+			using ShouldThrowConstraintException = snct::Constrained<double, InvalidConstraint_One, ValidConstraint_One>;
+			bool ctor_threw_snct_ConstraintException = false;
+			bool ctor_threw_other_exception = false;
+
+			// Act
+			try {
+				ShouldThrowConstraintException{ 2.2 /*any arbitrary value of the constrained type */ };
+			}
+			catch (snct::Constraint_Exception const&) {
+				ctor_threw_snct_ConstraintException = true;
+			}
+			catch (...) {
+				ctor_threw_other_exception = true;
+			}
+
+
+			// Assert
+			Assert::IsTrue(ctor_threw_snct_ConstraintException);
+			Assert::IsFalse(ctor_threw_other_exception);
+		}
+
+	};
 
 
 	TEST_CLASS(ctor_will_not_throw) {
@@ -256,6 +281,18 @@ namespace snct_constrained
 
 			// Arrange
 			using ShouldReturnNullopt = snct::Constrained<double, ValidConstraint_One, ValidConstraint_Two, InvalidConstraint_One>;
+
+			// Act
+			auto opt = ShouldReturnNullopt::factory(2.2 /*any arbitrary value of the constrained type */);
+
+			// Assert
+			Assert::IsFalse(opt.has_value());
+		}
+
+		TEST_METHOD(when_any_constraint_is_not_satisfied_even_if_the_last_constraint_is_satisfied) {
+			
+			// Arrange
+			using ShouldReturnNullopt = snct::Constrained<double, InvalidConstraint_One, ValidConstraint_One>;
 
 			// Act
 			auto opt = ShouldReturnNullopt::factory(2.2 /*any arbitrary value of the constrained type */);

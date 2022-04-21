@@ -29,9 +29,9 @@ namespace snct
 
         [[nodiscard]] constexpr operator T const & () const { return underlying_; }
 
-        constexpr Constrained(T t); // throws on constraint violation
+        constexpr Constrained(T t); // throws Constraint_Exception on constraint violation
 
-        [[nodiscard]] static constexpr std::optional<Constrained> factory(T t) noexcept; // returns nullopt_t on constraint violation
+        [[nodiscard]] static constexpr std::optional<Constrained> factory(T t) noexcept; // returns std::nullopt on constraint violation
 
     private:
         class Factoryparam {};
@@ -63,10 +63,7 @@ namespace snct
     template<typename T, Constraint<T> ... constraint>
     [[nodiscard]] inline constexpr std::optional<Constrained<T, constraint ...>> Constrained<T, constraint ...>::factory(T t) noexcept
     {
-        // bool all_satisfied = true;
-        // ((constraint::is_satisfied(t) ? true : (all_satisfied = false)), ...);
-
-        bool const all_satisfied = ((constraint::is_satisfied(t) ? true : false), ...);
+        bool const all_satisfied = ((constraint::is_satisfied(t) ? true : false) && ...);
 
         if (all_satisfied)
             return Constrained{ t, Factoryparam{} };
