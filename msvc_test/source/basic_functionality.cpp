@@ -21,17 +21,34 @@ namespace snct_constrained
 
 		TEST_METHOD(are_the_size_of_the_underlying_object)
 		{
-			auto R_char = char{ 0 };
-			auto C_char = snct::Constrained<char>{ 0 };
-			Assert::AreEqual(sizeof C_char, sizeof R_char, L"Constrained chars should be the size of regular chars");
+			struct OnePointer
+			{
+				void* p0 = nullptr;
+			};
 
-			auto R_int = int{ 0 };
-			auto C_int = snct::Constrained<int>{ 0 };
-			Assert::AreEqual(sizeof C_int, sizeof R_int, L"Constrained ints should be the size of regular ints");
+			struct TwoPointer
+			{
+				void* p0 = nullptr; void* p1 = nullptr;
+			};
 
-			auto R_double = double{ 0 };
-			auto C_double = snct::Constrained<double>{ 0 };
-			Assert::AreEqual(sizeof C_double, sizeof R_double, L"Constrained doubles should be the size of regular doubles");
+			struct TenPointer
+			{
+				void* p0 = nullptr; void* p1 = nullptr; void* p2 = nullptr; void* p3 = nullptr; void* p4 = nullptr;
+				void* p5 = nullptr; void* p6 = nullptr; void* p7 = nullptr; void* p8 = nullptr; void* p9 = nullptr;
+			};
+
+
+			auto regular_OnePointer = OnePointer{};
+			auto constrained_OnePointer = snct::Constrained<OnePointer>{ {} };
+			Assert::AreEqual(sizeof regular_OnePointer, sizeof constrained_OnePointer, L"Constrained OnePointer should be the size of regular OnePointer");
+
+			auto regular_TwoPointer = TwoPointer{};
+			auto constrained_TwoPointer = snct::Constrained<TwoPointer>{ {} };
+			Assert::AreEqual(sizeof regular_TwoPointer, sizeof constrained_TwoPointer, L"Constrained TwoPointer should be the size of regular TwoPointer");
+
+			auto regular_TenPointer = TenPointer{};
+			auto constrained_TenPointer = snct::Constrained<TenPointer>{ {} };
+			Assert::AreEqual(sizeof regular_TenPointer, sizeof constrained_TenPointer, L"Constrained TenPointer should be the size of regular TenPointer");
 		}
 
 		TEST_METHOD(maintain_size_as_constraints_are_added)
@@ -39,13 +56,25 @@ namespace snct_constrained
 			auto regular = char{ 'a' };
 			auto constrained_0 = snct::Constrained<char>{ 'a' };
 			auto constrained_1 = snct::Constrained<char, snct::Not<'b'>>{ 'a' };
-			auto constrained_2 = snct::Constrained<char, snct::Not<'b'>, snct::Not<'c'>>{ 'a' };
-			auto constrained_3 = snct::Constrained<char, snct::Not<'b'>, snct::Not<'c'>, snct::Not<'d'>>{ 'a' };
+			auto constrained_2 = snct::Constrained<char, snct::Not<'b'>, snct::LessThan<'c'>>{ 'a' };
+			auto constrained_3 = snct::Constrained<char, snct::Not<'b'>, snct::LessThan<'c'>, snct::GreaterThan<'\0'>>{ 'a' };
 
-			Assert::AreEqual(sizeof regular, sizeof constrained_0);
-			Assert::AreEqual(sizeof regular, sizeof constrained_1);
-			Assert::AreEqual(sizeof regular, sizeof constrained_2);
-			Assert::AreEqual(sizeof regular, sizeof constrained_3);
+			Assert::AreEqual(sizeof regular, sizeof constrained_0, L"Constrained types with 0 constraints should be the same size as the underlying type");
+			Assert::AreEqual(sizeof regular, sizeof constrained_1, L"Constrained types with 1 constraints should be the same size as the underlying type");
+			Assert::AreEqual(sizeof regular, sizeof constrained_2, L"Constrained types with 2 constraints should be the same size as the underlying type");
+			Assert::AreEqual(sizeof regular, sizeof constrained_3, L"Constrained types with 3 constraints should be the same size as the underlying type");
+		}
+
+		TEST_METHOD(contain_a_copy_rather_than_a_reference)
+		{
+			auto a = 0;
+			auto constrained = snct::Constrained<int>{ a };
+
+			Assert::AreEqual(a, (int)constrained);
+
+			a += 1;
+
+			Assert::AreNotEqual(a, (int)constrained);
 		}
 	};
 
@@ -59,7 +88,20 @@ namespace snct_constrained
 			//no assert
 		}
 
-		TEST_METHOD(are_always_the_size_of_a_pointer)
+		TEST_METHOD(are_the_size_of_a_pointer)
+		{
+			struct TwoPointers
+			{
+				void* a;
+				void* b;
+			};
+
+			auto underlying_TwoPointers = TwoPointers{};
+			auto constrained_TwoPointers = snct::Constrained<TwoPointers&>{ underlying_TwoPointers };
+			Assert::AreEqual(sizeof(void*), sizeof constrained_TwoPointers, L"A constrained ref to a TwoPointers struct should be the size of a pointer");
+		}
+
+		TEST_METHOD(maintain_size_as_constraints_are_added)
 		{
 			auto regular = char{ 'a' };
 			auto constrained_0 = snct::Constrained<char&>{ regular };
@@ -67,10 +109,22 @@ namespace snct_constrained
 			auto constrained_2 = snct::Constrained<char&, snct::Not<'b'>, snct::Not<'c'>>{ regular };
 			auto constrained_3 = snct::Constrained<char&, snct::Not<'b'>, snct::Not<'c'>, snct::Not<'d'>>{ regular };
 
-			Assert::AreEqual(sizeof (void*), sizeof constrained_0);
-			Assert::AreEqual(sizeof (void*), sizeof constrained_1);
-			Assert::AreEqual(sizeof (void*), sizeof constrained_2);
-			Assert::AreEqual(sizeof (void*), sizeof constrained_3);
+			Assert::AreEqual(sizeof(void*), sizeof constrained_0);
+			Assert::AreEqual(sizeof(void*), sizeof constrained_1);
+			Assert::AreEqual(sizeof(void*), sizeof constrained_2);
+			Assert::AreEqual(sizeof(void*), sizeof constrained_3);
+		}
+
+		TEST_METHOD(contain_a_reference_rather_than_a_copy)
+		{
+			auto a = 0;
+			auto constrained = snct::Constrained<int&>{ a };
+
+			Assert::AreEqual(a, (int)constrained);
+
+			a += 1;
+
+			Assert::AreEqual(a, (int)constrained);
 		}
 	};
 
@@ -85,7 +139,41 @@ namespace snct_constrained
 
 		TEST_METHOD(are_the_size_of_a_pointer)
 		{
+			struct TwoPointers
+			{
+				void* a;
+				void* b;
+			};
 
+			auto underlying_TwoPointers = TwoPointers{};
+			auto constrained_TwoPointers = snct::Constrained<TwoPointers const&>{ underlying_TwoPointers };
+			Assert::AreEqual(sizeof(void*), sizeof constrained_TwoPointers, L"A constrained ref to a TwoPointers struct should be the size of a pointer");
+		}
+
+		TEST_METHOD(maintain_size_as_constraints_are_added)
+		{
+			auto regular = char{ 'a' };
+			auto constrained_0 = snct::Constrained<char const&>{ regular };
+			auto constrained_1 = snct::Constrained<char const&, snct::Not<'b'>>{ regular };
+			auto constrained_2 = snct::Constrained<char const&, snct::Not<'b'>, snct::Not<'c'>>{ regular };
+			auto constrained_3 = snct::Constrained<char const&, snct::Not<'b'>, snct::Not<'c'>, snct::Not<'d'>>{ regular };
+
+			Assert::AreEqual(sizeof(void*), sizeof constrained_0);
+			Assert::AreEqual(sizeof(void*), sizeof constrained_1);
+			Assert::AreEqual(sizeof(void*), sizeof constrained_2);
+			Assert::AreEqual(sizeof(void*), sizeof constrained_3);
+		}
+
+		TEST_METHOD(contain_a_reference_rather_than_a_copy)
+		{
+			auto a = 0;
+			auto constrained = snct::Constrained<int const&>{ a };
+
+			Assert::AreEqual(a, (int)constrained);
+
+			a += 1;
+
+			Assert::AreEqual(a, (int)constrained);
 		}
 	};
 
