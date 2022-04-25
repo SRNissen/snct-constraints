@@ -1,7 +1,7 @@
 #ifndef SNCT_TEST_CONSTRAINTS_H
 #define SNCT_TEST_CONSTRAINTS_H
 
-// A valid constraint satisfies this concept:
+// A constraint satisfies this concept:
 //  
 // template<typename ConstraintType, typename ValueType>
 // concept Constraint = requires(ValueType v)

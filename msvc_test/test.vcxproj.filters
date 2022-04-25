@@ -28,6 +28,9 @@
     <ClCompile Include="source\constraint_Comparisons.cpp">
       <Filter>test source</Filter>
     </ClCompile>
+    <ClCompile Include="source\constraint_Trivial.cpp">
+      <Filter>test source</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="source\test_doubles.h">

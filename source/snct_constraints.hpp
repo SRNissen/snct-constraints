@@ -23,7 +23,7 @@ namespace snct
 	template<>
 	struct Not<nullptr>
 	{
-		constexpr static bool is_satisfied(auto const * const t) noexcept { return t != nullptr; }
+		constexpr static bool is_satisfied(auto const* const t) noexcept { return t != nullptr; }
 		inline static const char* error_message() noexcept { return "Constraint 'snct::Not<nullptr>' was violated."; }
 	};
 
@@ -69,6 +69,27 @@ namespace snct
 		constexpr static bool is_satisfied(T const& t) noexcept { return std::less_equal<T>{}(t, value); }
 		inline static const char* error_message() noexcept { return "Constraint 'snct::Maximum<value>' was violated"; }
 	};
+
+	template<bool value>
+	struct Satisfied
+	{
+		constexpr static bool is_satisfied(auto const&) noexcept { return value; }
+		inline static const char* error_message() noexcept { return "Constraint 'snct::Satisfied<true/false>' was violated"; }
+	};
+
+	struct AlwaysSatisfied
+	{
+		constexpr static bool is_satisfied(auto const&) noexcept { return true; }
+		inline static const char* error_message() noexcept { return "Constraint 'Always_Valid' was violated"; }
+	};
+
+
+	struct NeverSatisfied
+	{
+		constexpr static bool is_satisfied(auto const&) noexcept { return false; }
+		inline static const char* error_message() noexcept { return "Constraint 'Never_Valid' was violated"; }
+	};
+
 }
 
 #endif //header guard

@@ -63,6 +63,7 @@
     <ClCompile Include="source\constraint_Comparisons.cpp" />
     <ClCompile Include="source\constraint_Finite.cpp" />
     <ClCompile Include="source\constraint_Not.cpp" />
+    <ClCompile Include="source\constraint_Trivial.cpp" />
     <ClCompile Include="source\math_functions.cpp" />
     <ClCompile Include="source\template_file.cpp" />
   </ItemGroup>

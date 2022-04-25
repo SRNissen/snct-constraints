@@ -1,5 +1,5 @@
 #include "CppUnitTest.h"
-#include "snct_constrained.hpp"
+#include "snct_constraints.hpp"
 #include "test_constraints.h"
 #include <string_view>
 
@@ -11,6 +11,84 @@ using namespace Microsoft::VisualStudio::CppUnitTestFramework;
 
 namespace snct_constrained
 {
+	TEST_CLASS(value_constraints)
+	{
+		TEST_METHOD(compile)
+		{
+			auto val = snct::Constrained<int>{ 0 };
+			//no assert
+		}
+
+		TEST_METHOD(are_the_size_of_the_underlying_object)
+		{
+			auto R_char = char{ 0 };
+			auto C_char = snct::Constrained<char>{ 0 };
+			Assert::AreEqual(sizeof C_char, sizeof R_char, L"Constrained chars should be the size of regular chars");
+
+			auto R_int = int{ 0 };
+			auto C_int = snct::Constrained<int>{ 0 };
+			Assert::AreEqual(sizeof C_int, sizeof R_int, L"Constrained ints should be the size of regular ints");
+
+			auto R_double = double{ 0 };
+			auto C_double = snct::Constrained<double>{ 0 };
+			Assert::AreEqual(sizeof C_double, sizeof R_double, L"Constrained doubles should be the size of regular doubles");
+		}
+
+		TEST_METHOD(maintain_size_as_constraints_are_added)
+		{
+			auto regular = char{ 'a' };
+			auto constrained_0 = snct::Constrained<char>{ 'a' };
+			auto constrained_1 = snct::Constrained<char, snct::Not<'b'>>{ 'a' };
+			auto constrained_2 = snct::Constrained<char, snct::Not<'b'>, snct::Not<'c'>>{ 'a' };
+			auto constrained_3 = snct::Constrained<char, snct::Not<'b'>, snct::Not<'c'>, snct::Not<'d'>>{ 'a' };
+
+			Assert::AreEqual(sizeof regular, sizeof constrained_0);
+			Assert::AreEqual(sizeof regular, sizeof constrained_1);
+			Assert::AreEqual(sizeof regular, sizeof constrained_2);
+			Assert::AreEqual(sizeof regular, sizeof constrained_3);
+		}
+	};
+
+	TEST_CLASS(reference_constraints)
+	{
+
+		TEST_METHOD(compile)
+		{
+			int val = 0;
+			auto ref = snct::Constrained<int&>{ val };
+			//no assert
+		}
+
+		TEST_METHOD(are_always_the_size_of_a_pointer)
+		{
+			auto regular = char{ 'a' };
+			auto constrained_0 = snct::Constrained<char&>{ regular };
+			auto constrained_1 = snct::Constrained<char&, snct::Not<'b'>>{ regular };
+			auto constrained_2 = snct::Constrained<char&, snct::Not<'b'>, snct::Not<'c'>>{ regular };
+			auto constrained_3 = snct::Constrained<char&, snct::Not<'b'>, snct::Not<'c'>, snct::Not<'d'>>{ regular };
+
+			Assert::AreEqual(sizeof (void*), sizeof constrained_0);
+			Assert::AreEqual(sizeof (void*), sizeof constrained_1);
+			Assert::AreEqual(sizeof (void*), sizeof constrained_2);
+			Assert::AreEqual(sizeof (void*), sizeof constrained_3);
+		}
+	};
+
+	TEST_CLASS(const_reference_constraints)
+	{
+		TEST_METHOD(compile)
+		{
+			int val = 0;
+			auto ref = snct::Constrained<int const&>{ val };
+			//no assert
+		}
+
+		TEST_METHOD(are_the_size_of_a_pointer)
+		{
+
+		}
+	};
+
 	TEST_CLASS(constrained_object_stores_parameter_on_succesful_construction)
 	{
 		TEST_METHOD(using_the_factory)
@@ -23,7 +101,7 @@ namespace snct_constrained
 			double storedParameter = Storage::factory(parameter).value();
 
 			// Assert
-			Assert::AreEqual(parameter, storedParameter);	
+			Assert::AreEqual(parameter, storedParameter);
 		}
 
 
@@ -247,7 +325,7 @@ namespace snct_constrained
 	};
 
 
-	TEST_CLASS(factory_returns_nullopt)	{
+	TEST_CLASS(factory_returns_nullopt) {
 
 
 		TEST_METHOD(when_there_is_one_constraint_and_it_is_not_satisfied) {
@@ -290,7 +368,7 @@ namespace snct_constrained
 		}
 
 		TEST_METHOD(when_any_constraint_is_not_satisfied_even_if_the_last_constraint_is_satisfied) {
-			
+
 			// Arrange
 			using ShouldReturnNullopt = snct::Constrained<double, InvalidConstraint_One, ValidConstraint_One>;
 

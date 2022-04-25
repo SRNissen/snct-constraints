@@ -1,6 +1,5 @@
 #include "CppUnitTest.h"
 #include "snct_constraints.hpp"
-#include "test_doubles.h"
 
 using namespace Microsoft::VisualStudio::CppUnitTestFramework;
 
