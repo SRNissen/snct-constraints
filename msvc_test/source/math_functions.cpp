@@ -50,6 +50,42 @@ namespace constexpr_math_function
 				Assert::AreEqual(expected_returnvalue, actual_returnvalue);
 			}
 
+			TEST_METHOD(on_positive_max) {
+				//Arrange
+				const auto expected_returnvalue = false;
+				const auto input_value = Doubles.at(DD::positive_max);
+
+				//Act
+				auto actual_returnvalue = snct::is_nan(input_value);
+
+				//Assert
+				Assert::AreEqual(expected_returnvalue, actual_returnvalue);
+			}
+
+			TEST_METHOD(on_positive_min) {
+				//Arrange
+				const auto expected_returnvalue = false;
+				const auto input_value = Doubles.at(DD::positive_min);
+
+				//Act
+				auto actual_returnvalue = snct::is_nan(input_value);
+
+				//Assert
+				Assert::AreEqual(expected_returnvalue, actual_returnvalue);
+			}
+
+			TEST_METHOD(on_positive_denormalized_min) {
+				//Arrange
+				const auto expected_returnvalue = false;
+				const auto input_value = Doubles.at(DD::positive_denormalized_min);
+
+				//Act
+				auto actual_returnvalue = snct::is_nan(input_value);
+
+				//Assert
+				Assert::AreEqual(expected_returnvalue, actual_returnvalue);
+			}
+
 			TEST_METHOD(on_negative_infinity) {
 				//Arrange
 				const auto expected_returnvalue = false;
@@ -62,10 +98,10 @@ namespace constexpr_math_function
 				Assert::AreEqual(expected_returnvalue, actual_returnvalue);
 			}
 
-			TEST_METHOD(on_positive_lowest) {
+			TEST_METHOD(on_negative_max) {
 				//Arrange
 				const auto expected_returnvalue = false;
-				const auto input_value = Doubles.at(DD::positive_lowest);
+				const auto input_value = Doubles.at(DD::negative_max);
 
 				//Act
 				auto actual_returnvalue = snct::is_nan(input_value);
@@ -74,10 +110,10 @@ namespace constexpr_math_function
 				Assert::AreEqual(expected_returnvalue, actual_returnvalue);
 			}
 
-			TEST_METHOD(on_negative_lowest) {
+			TEST_METHOD(on_negative_min) {
 				//Arrange
 				const auto expected_returnvalue = false;
-				const auto input_value = Doubles.at(DD::negative_lowest);
+				const auto input_value = Doubles.at(DD::negative_min);
 
 				//Act
 				auto actual_returnvalue = snct::is_nan(input_value);
@@ -86,10 +122,10 @@ namespace constexpr_math_function
 				Assert::AreEqual(expected_returnvalue, actual_returnvalue);
 			}
 
-			TEST_METHOD(on_minimum) {
+			TEST_METHOD(on_negative_denormalized_min) {
 				//Arrange
 				const auto expected_returnvalue = false;
-				const auto input_value = Doubles.at(DD::minimum);
+				const auto input_value = Doubles.at(DD::negative_denormalized_min);
 
 				//Act
 				auto actual_returnvalue = snct::is_nan(input_value);
@@ -98,41 +134,6 @@ namespace constexpr_math_function
 				Assert::AreEqual(expected_returnvalue, actual_returnvalue);
 			}
 
-			TEST_METHOD(on_maximum) {
-				//Arrange
-				const auto expected_returnvalue = false;
-				const auto input_value = Doubles.at(DD::maximum);
-
-				//Act
-				auto actual_returnvalue = snct::is_nan(input_value);
-
-				//Assert
-				Assert::AreEqual(expected_returnvalue, actual_returnvalue);
-			}
-
-			TEST_METHOD(on_zero) {
-				//Arrange
-				const auto expected_returnvalue = false;
-				const auto input_value = Doubles.at(DD::zero);
-
-				//Act
-				auto actual_returnvalue = snct::is_nan(input_value);
-
-				//Assert
-				Assert::AreEqual(expected_returnvalue, actual_returnvalue);
-			}
-
-			TEST_METHOD(on_one) {
-				//Arrange
-				const auto expected_returnvalue = false;
-				const auto input_value = Doubles.at(DD::one);
-
-				//Act
-				auto actual_returnvalue = snct::is_nan(input_value);
-
-				//Assert
-				Assert::AreEqual(expected_returnvalue, actual_returnvalue);
-			}
 		};
 	}
 
@@ -140,13 +141,14 @@ namespace constexpr_math_function
 	{
 		TEST_CLASS(returns_true)
 		{
-			TEST_METHOD(on_positive_infinity) {
+			TEST_METHOD(on_positive_infinity)
+			{
 				//Arrange
 				const auto expected_returnvalue = true;
 				const auto input_value = Doubles.at(DD::positive_infinity);
 
-				//Act
-				auto actual_returnvalue = snct::is_positive_infinite(input_value);
+				//ACT
+				const auto actual_returnvalue = snct::is_positive_infinite(input_value);
 
 				//Assert
 				Assert::AreEqual(expected_returnvalue, actual_returnvalue);
@@ -155,109 +157,144 @@ namespace constexpr_math_function
 
 		TEST_CLASS(returns_false)
 		{
-			TEST_METHOD(on_quiet_NaN) {
-				//Arrange
-				const auto expected_returnvalue = false;
-				const auto input_value = Doubles.at(DD::quiet_NaN);
-
-				//Act
-				auto actual_returnvalue = snct::is_positive_infinite(input_value);
-
-				//Assert
-				Assert::AreEqual(expected_returnvalue, actual_returnvalue);
-			}
-
-			TEST_METHOD(on_signalling_NaN) {
+			TEST_METHOD(on_signalling_NaN)
+			{
 				//Arrange
 				const auto expected_returnvalue = false;
 				const auto input_value = Doubles.at(DD::signalling_NaN);
 
-				//Act
-				auto actual_returnvalue = snct::is_positive_infinite(input_value);
+				//ACT
+				const auto actual_returnvalue = snct::is_positive_infinite(input_value);
 
 				//Assert
 				Assert::AreEqual(expected_returnvalue, actual_returnvalue);
 			}
 
-			TEST_METHOD(on_negative_infinity) {
+			TEST_METHOD(on_quiet_NaN)
+			{
+				//Arrange
+				const auto expected_returnvalue = false;
+				const auto input_value = Doubles.at(DD::quiet_NaN);
+
+				//ACT
+				const auto actual_returnvalue = snct::is_positive_infinite(input_value);
+
+				//Assert
+				Assert::AreEqual(expected_returnvalue, actual_returnvalue);
+			}
+
+			TEST_METHOD(on_positive_max)
+			{
+				//Arrange
+				const auto expected_returnvalue = false;
+				const auto input_value = Doubles.at(DD::positive_max);
+
+				//ACT
+				const auto actual_returnvalue = snct::is_positive_infinite(input_value);
+
+				//Assert
+				Assert::AreEqual(expected_returnvalue, actual_returnvalue);
+			}
+
+			TEST_METHOD(on_positive_min)
+			{
+				//Arrange
+				const auto expected_returnvalue = false;
+				const auto input_value = Doubles.at(DD::positive_min);
+
+				//ACT
+				const auto actual_returnvalue = snct::is_positive_infinite(input_value);
+
+				//Assert
+				Assert::AreEqual(expected_returnvalue, actual_returnvalue);
+			}
+
+			TEST_METHOD(on_positive_denormalized_min)
+			{
+				//Arrange
+				const auto expected_returnvalue = false;
+				const auto input_value = Doubles.at(DD::positive_denormalized_min);
+
+				//ACT
+				const auto actual_returnvalue = snct::is_positive_infinite(input_value);
+
+				//Assert
+				Assert::AreEqual(expected_returnvalue, actual_returnvalue);
+			}
+
+			TEST_METHOD(on_negative_infinity)
+			{
 				//Arrange
 				const auto expected_returnvalue = false;
 				const auto input_value = Doubles.at(DD::negative_infinity);
 
-				//Act
-				auto actual_returnvalue = snct::is_positive_infinite(input_value);
+				//ACT
+				const auto actual_returnvalue = snct::is_positive_infinite(input_value);
 
 				//Assert
 				Assert::AreEqual(expected_returnvalue, actual_returnvalue);
 			}
 
-			TEST_METHOD(on_positive_lowest) {
+			TEST_METHOD(on_negative_max)
+			{
 				//Arrange
 				const auto expected_returnvalue = false;
-				const auto input_value = Doubles.at(DD::positive_lowest);
+				const auto input_value = Doubles.at(DD::negative_max);
 
-				//Act
-				auto actual_returnvalue = snct::is_positive_infinite(input_value);
+				//ACT
+				const auto actual_returnvalue = snct::is_positive_infinite(input_value);
 
 				//Assert
 				Assert::AreEqual(expected_returnvalue, actual_returnvalue);
 			}
 
-			TEST_METHOD(on_negative_lowest) {
+			TEST_METHOD(on_negative_min)
+			{
 				//Arrange
 				const auto expected_returnvalue = false;
-				const auto input_value = Doubles.at(DD::negative_lowest);
+				const auto input_value = Doubles.at(DD::negative_min);
 
-				//Act
-				auto actual_returnvalue = snct::is_positive_infinite(input_value);
+				//ACT
+				const auto actual_returnvalue = snct::is_positive_infinite(input_value);
 
 				//Assert
 				Assert::AreEqual(expected_returnvalue, actual_returnvalue);
 			}
 
-			TEST_METHOD(on_minimum) {
+			TEST_METHOD(on_negative_denormalized_min)
+			{
 				//Arrange
 				const auto expected_returnvalue = false;
-				const auto input_value = Doubles.at(DD::minimum);
+				const auto input_value = Doubles.at(DD::negative_denormalized_min);
 
-				//Act
-				auto actual_returnvalue = snct::is_positive_infinite(input_value);
-
-				//Assert
-				Assert::AreEqual(expected_returnvalue, actual_returnvalue);
-			}
-
-			TEST_METHOD(on_maximum) {
-				//Arrange
-				const auto expected_returnvalue = false;
-				const auto input_value = Doubles.at(DD::maximum);
-
-				//Act
-				auto actual_returnvalue = snct::is_positive_infinite(input_value);
+				//ACT
+				const auto actual_returnvalue = snct::is_positive_infinite(input_value);
 
 				//Assert
 				Assert::AreEqual(expected_returnvalue, actual_returnvalue);
 			}
 
-			TEST_METHOD(on_zero) {
+			TEST_METHOD(on_zero)
+			{
 				//Arrange
 				const auto expected_returnvalue = false;
 				const auto input_value = Doubles.at(DD::zero);
 
-				//Act
-				auto actual_returnvalue = snct::is_positive_infinite(input_value);
+				//ACT
+				const auto actual_returnvalue = snct::is_positive_infinite(input_value);
 
 				//Assert
 				Assert::AreEqual(expected_returnvalue, actual_returnvalue);
 			}
 
-			TEST_METHOD(on_one) {
+			TEST_METHOD(on_one)
+			{
 				//Arrange
 				const auto expected_returnvalue = false;
 				const auto input_value = Doubles.at(DD::one);
 
-				//Act
-				auto actual_returnvalue = snct::is_positive_infinite(input_value);
+				//ACT
+				const auto actual_returnvalue = snct::is_positive_infinite(input_value);
 
 				//Assert
 				Assert::AreEqual(expected_returnvalue, actual_returnvalue);
@@ -269,13 +306,14 @@ namespace constexpr_math_function
 	{
 		TEST_CLASS(returns_true)
 		{
-			TEST_METHOD(on_negative_infinity) {
+			TEST_METHOD(on_negative_infinity)
+			{
 				//Arrange
 				const auto expected_returnvalue = true;
 				const auto input_value = Doubles.at(DD::negative_infinity);
 
-				//Act
-				auto actual_returnvalue = snct::is_negative_infinite(input_value);
+				//ACT
+				const auto actual_returnvalue = snct::is_negative_infinite(input_value);
 
 				//Assert
 				Assert::AreEqual(expected_returnvalue, actual_returnvalue);
@@ -284,109 +322,144 @@ namespace constexpr_math_function
 
 		TEST_CLASS(returns_false)
 		{
-			TEST_METHOD(on_quiet_NaN) {
-				//Arrange
-				const auto expected_returnvalue = false;
-				const auto input_value = Doubles.at(DD::quiet_NaN);
-
-				//Act
-				auto actual_returnvalue = snct::is_negative_infinite(input_value);
-
-				//Assert
-				Assert::AreEqual(expected_returnvalue, actual_returnvalue);
-			}
-
-			TEST_METHOD(on_signalling_NaN) {
+			TEST_METHOD(on_signalling_NaN)
+			{
 				//Arrange
 				const auto expected_returnvalue = false;
 				const auto input_value = Doubles.at(DD::signalling_NaN);
 
-				//Act
-				auto actual_returnvalue = snct::is_negative_infinite(input_value);
+				//ACT
+				const auto actual_returnvalue = snct::is_negative_infinite(input_value);
 
 				//Assert
 				Assert::AreEqual(expected_returnvalue, actual_returnvalue);
 			}
 
-			TEST_METHOD(on_positive_infinity) {
+			TEST_METHOD(on_quiet_NaN)
+			{
+				//Arrange
+				const auto expected_returnvalue = false;
+				const auto input_value = Doubles.at(DD::quiet_NaN);
+
+				//ACT
+				const auto actual_returnvalue = snct::is_negative_infinite(input_value);
+
+				//Assert
+				Assert::AreEqual(expected_returnvalue, actual_returnvalue);
+			}
+
+			TEST_METHOD(on_positive_infinity)
+			{
 				//Arrange
 				const auto expected_returnvalue = false;
 				const auto input_value = Doubles.at(DD::positive_infinity);
 
-				//Act
-				auto actual_returnvalue = snct::is_negative_infinite(input_value);
+				//ACT
+				const auto actual_returnvalue = snct::is_negative_infinite(input_value);
 
 				//Assert
 				Assert::AreEqual(expected_returnvalue, actual_returnvalue);
 			}
 
-			TEST_METHOD(on_positive_lowest) {
+			TEST_METHOD(on_positive_max)
+			{
 				//Arrange
 				const auto expected_returnvalue = false;
-				const auto input_value = Doubles.at(DD::positive_lowest);
+				const auto input_value = Doubles.at(DD::positive_max);
 
-				//Act
-				auto actual_returnvalue = snct::is_negative_infinite(input_value);
+				//ACT
+				const auto actual_returnvalue = snct::is_negative_infinite(input_value);
 
 				//Assert
 				Assert::AreEqual(expected_returnvalue, actual_returnvalue);
 			}
 
-			TEST_METHOD(on_negative_lowest) {
+			TEST_METHOD(on_positive_min)
+			{
 				//Arrange
 				const auto expected_returnvalue = false;
-				const auto input_value = Doubles.at(DD::negative_lowest);
+				const auto input_value = Doubles.at(DD::positive_min);
 
-				//Act
-				auto actual_returnvalue = snct::is_negative_infinite(input_value);
+				//ACT
+				const auto actual_returnvalue = snct::is_negative_infinite(input_value);
 
 				//Assert
 				Assert::AreEqual(expected_returnvalue, actual_returnvalue);
 			}
 
-			TEST_METHOD(on_minimum) {
+			TEST_METHOD(on_positive_denormalized_min)
+			{
 				//Arrange
 				const auto expected_returnvalue = false;
-				const auto input_value = Doubles.at(DD::minimum);
+				const auto input_value = Doubles.at(DD::positive_denormalized_min);
 
-				//Act
-				auto actual_returnvalue = snct::is_negative_infinite(input_value);
+				//ACT
+				const auto actual_returnvalue = snct::is_negative_infinite(input_value);
 
 				//Assert
 				Assert::AreEqual(expected_returnvalue, actual_returnvalue);
 			}
 
-			TEST_METHOD(on_maximum) {
+			TEST_METHOD(on_negative_max)
+			{
 				//Arrange
 				const auto expected_returnvalue = false;
-				const auto input_value = Doubles.at(DD::maximum);
+				const auto input_value = Doubles.at(DD::negative_max);
 
-				//Act
-				auto actual_returnvalue = snct::is_negative_infinite(input_value);
+				//ACT
+				const auto actual_returnvalue = snct::is_negative_infinite(input_value);
 
 				//Assert
 				Assert::AreEqual(expected_returnvalue, actual_returnvalue);
 			}
 
-			TEST_METHOD(on_zero) {
+			TEST_METHOD(on_negative_min)
+			{
+				//Arrange
+				const auto expected_returnvalue = false;
+				const auto input_value = Doubles.at(DD::negative_min);
+
+				//ACT
+				const auto actual_returnvalue = snct::is_negative_infinite(input_value);
+
+				//Assert
+				Assert::AreEqual(expected_returnvalue, actual_returnvalue);
+			}
+
+			TEST_METHOD(on_negative_denormalized_min)
+			{
+				//Arrange
+				const auto expected_returnvalue = false;
+				const auto input_value = Doubles.at(DD::negative_denormalized_min);
+
+				//ACT
+				const auto actual_returnvalue = snct::is_negative_infinite(input_value);
+
+				//Assert
+				Assert::AreEqual(expected_returnvalue, actual_returnvalue);
+			}
+
+			TEST_METHOD(on_zero)
+			{
 				//Arrange
 				const auto expected_returnvalue = false;
 				const auto input_value = Doubles.at(DD::zero);
 
-				//Act
-				auto actual_returnvalue = snct::is_negative_infinite(input_value);
+				//ACT
+				const auto actual_returnvalue = snct::is_negative_infinite(input_value);
 
 				//Assert
 				Assert::AreEqual(expected_returnvalue, actual_returnvalue);
 			}
 
-			TEST_METHOD(on_one) {
+			TEST_METHOD(on_one)
+			{
 				//Arrange
 				const auto expected_returnvalue = false;
 				const auto input_value = Doubles.at(DD::one);
 
-				//Act
-				auto actual_returnvalue = snct::is_negative_infinite(input_value);
+				//ACT
+				const auto actual_returnvalue = snct::is_negative_infinite(input_value);
 
 				//Assert
 				Assert::AreEqual(expected_returnvalue, actual_returnvalue);
@@ -398,116 +471,161 @@ namespace constexpr_math_function
 	{
 		TEST_CLASS(returns_true)
 		{
-			TEST_METHOD(on_positive_infinity) {
+			TEST_METHOD(on_positive_infinity)
+			{
 				//Arrange
 				const auto expected_returnvalue = true;
 				const auto input_value = Doubles.at(DD::positive_infinity);
 
-				//Act
-				auto actual_returnvalue = snct::is_infinite(input_value);
+				//ACT
+				const auto actual_returnvalue = snct::is_infinite(input_value);
 
 				//Assert
 				Assert::AreEqual(expected_returnvalue, actual_returnvalue);
 			}
-			TEST_METHOD(on_negative_infinity) {
+
+			TEST_METHOD(on_negative_infinity)
+			{
 				//Arrange
 				const auto expected_returnvalue = true;
 				const auto input_value = Doubles.at(DD::negative_infinity);
 
-				//Act
-				auto actual_returnvalue = snct::is_infinite(input_value);
+				//ACT
+				const auto actual_returnvalue = snct::is_infinite(input_value);
 
 				//Assert
 				Assert::AreEqual(expected_returnvalue, actual_returnvalue);
 			}
+
 		};
 
 		TEST_CLASS(returns_false)
 		{
-			TEST_METHOD(on_signalling_NaN) {
+			TEST_METHOD(on_signalling_NaN)
+			{
 				//Arrange
 				const auto expected_returnvalue = false;
 				const auto input_value = Doubles.at(DD::signalling_NaN);
 
-				//Act
-				auto actual_returnvalue = snct::is_infinite(input_value);
+				//ACT
+				const auto actual_returnvalue = snct::is_infinite(input_value);
 
 				//Assert
 				Assert::AreEqual(expected_returnvalue, actual_returnvalue);
 			}
-			TEST_METHOD(on_quiet_NaN) {
+
+			TEST_METHOD(on_quiet_NaN)
+			{
 				//Arrange
 				const auto expected_returnvalue = false;
 				const auto input_value = Doubles.at(DD::quiet_NaN);
 
-				//Act
-				auto actual_returnvalue = snct::is_infinite(input_value);
+				//ACT
+				const auto actual_returnvalue = snct::is_infinite(input_value);
 
 				//Assert
 				Assert::AreEqual(expected_returnvalue, actual_returnvalue);
 			}
-			TEST_METHOD(on_positive_lowest) {
+
+			TEST_METHOD(on_positive_max)
+			{
 				//Arrange
 				const auto expected_returnvalue = false;
-				const auto input_value = Doubles.at(DD::positive_lowest);
+				const auto input_value = Doubles.at(DD::positive_max);
 
-				//Act
-				auto actual_returnvalue = snct::is_infinite(input_value);
+				//ACT
+				const auto actual_returnvalue = snct::is_infinite(input_value);
 
 				//Assert
 				Assert::AreEqual(expected_returnvalue, actual_returnvalue);
 			}
-			TEST_METHOD(on_negative_lowest) {
+
+			TEST_METHOD(on_positive_min)
+			{
 				//Arrange
 				const auto expected_returnvalue = false;
-				const auto input_value = Doubles.at(DD::negative_lowest);
+				const auto input_value = Doubles.at(DD::positive_min);
 
-				//Act
-				auto actual_returnvalue = snct::is_infinite(input_value);
+				//ACT
+				const auto actual_returnvalue = snct::is_infinite(input_value);
 
 				//Assert
 				Assert::AreEqual(expected_returnvalue, actual_returnvalue);
 			}
-			TEST_METHOD(on_minimum) {
+
+			TEST_METHOD(on_positive_denormalized_min)
+			{
 				//Arrange
 				const auto expected_returnvalue = false;
-				const auto input_value = Doubles.at(DD::minimum);
+				const auto input_value = Doubles.at(DD::positive_denormalized_min);
 
-				//Act
-				auto actual_returnvalue = snct::is_infinite(input_value);
+				//ACT
+				const auto actual_returnvalue = snct::is_infinite(input_value);
 
 				//Assert
 				Assert::AreEqual(expected_returnvalue, actual_returnvalue);
 			}
-			TEST_METHOD(on_maximum) {
+
+			TEST_METHOD(on_negative_max)
+			{
 				//Arrange
 				const auto expected_returnvalue = false;
-				const auto input_value = Doubles.at(DD::maximum);
+				const auto input_value = Doubles.at(DD::negative_max);
 
-				//Act
-				auto actual_returnvalue = snct::is_infinite(input_value);
+				//ACT
+				const auto actual_returnvalue = snct::is_infinite(input_value);
 
 				//Assert
 				Assert::AreEqual(expected_returnvalue, actual_returnvalue);
 			}
-			TEST_METHOD(on_zero) {
+
+			TEST_METHOD(on_negative_min)
+			{
+				//Arrange
+				const auto expected_returnvalue = false;
+				const auto input_value = Doubles.at(DD::negative_min);
+
+				//ACT
+				const auto actual_returnvalue = snct::is_infinite(input_value);
+
+				//Assert
+				Assert::AreEqual(expected_returnvalue, actual_returnvalue);
+			}
+
+			TEST_METHOD(on_negative_denormalized_min)
+			{
+				//Arrange
+				const auto expected_returnvalue = false;
+				const auto input_value = Doubles.at(DD::negative_denormalized_min);
+
+				//ACT
+				const auto actual_returnvalue = snct::is_infinite(input_value);
+
+				//Assert
+				Assert::AreEqual(expected_returnvalue, actual_returnvalue);
+			}
+
+			TEST_METHOD(on_zero)
+			{
 				//Arrange
 				const auto expected_returnvalue = false;
 				const auto input_value = Doubles.at(DD::zero);
 
-				//Act
-				auto actual_returnvalue = snct::is_infinite(input_value);
+				//ACT
+				const auto actual_returnvalue = snct::is_infinite(input_value);
 
 				//Assert
 				Assert::AreEqual(expected_returnvalue, actual_returnvalue);
 			}
-			TEST_METHOD(on_one) {
+
+			TEST_METHOD(on_one)
+			{
 				//Arrange
 				const auto expected_returnvalue = false;
 				const auto input_value = Doubles.at(DD::one);
 
-				//Act
-				auto actual_returnvalue = snct::is_infinite(input_value);
+				//ACT
+				const auto actual_returnvalue = snct::is_infinite(input_value);
 
 				//Assert
 				Assert::AreEqual(expected_returnvalue, actual_returnvalue);
@@ -518,73 +636,105 @@ namespace constexpr_math_function
 	{
 		TEST_CLASS(returns_true)
 		{
-			TEST_METHOD(on_positive_lowest) {
+			TEST_METHOD(on_positive_max)
+			{
 				//Arrange
 				const auto expected_returnvalue = true;
-				const auto input_value = Doubles.at(DD::positive_lowest);
+				const auto input_value = Doubles.at(DD::positive_max);
 
-				//Act
-				auto actual_returnvalue = snct::is_finite(input_value);
+				//ACT
+				const auto actual_returnvalue = snct::is_finite(input_value);
 
 				//Assert
 				Assert::AreEqual(expected_returnvalue, actual_returnvalue);
 			}
 
-			TEST_METHOD(on_negative_lowest) {
+			TEST_METHOD(on_positive_min)
+			{
 				//Arrange
 				const auto expected_returnvalue = true;
-				const auto input_value = Doubles.at(DD::negative_lowest);
+				const auto input_value = Doubles.at(DD::positive_min);
 
-				//Act
-				auto actual_returnvalue = snct::is_finite(input_value);
+				//ACT
+				const auto actual_returnvalue = snct::is_finite(input_value);
 
 				//Assert
 				Assert::AreEqual(expected_returnvalue, actual_returnvalue);
 			}
 
-			TEST_METHOD(on_minimum) {
+			TEST_METHOD(on_positive_denormalized_min)
+			{
 				//Arrange
 				const auto expected_returnvalue = true;
-				const auto input_value = Doubles.at(DD::minimum);
+				const auto input_value = Doubles.at(DD::positive_denormalized_min);
 
-				//Act
-				auto actual_returnvalue = snct::is_finite(input_value);
+				//ACT
+				const auto actual_returnvalue = snct::is_finite(input_value);
 
 				//Assert
 				Assert::AreEqual(expected_returnvalue, actual_returnvalue);
 			}
 
-			TEST_METHOD(on_maximum) {
+			TEST_METHOD(on_negative_max)
+			{
 				//Arrange
 				const auto expected_returnvalue = true;
-				const auto input_value = Doubles.at(DD::maximum);
+				const auto input_value = Doubles.at(DD::negative_max);
 
-				//Act
-				auto actual_returnvalue = snct::is_finite(input_value);
+				//ACT
+				const auto actual_returnvalue = snct::is_finite(input_value);
 
 				//Assert
 				Assert::AreEqual(expected_returnvalue, actual_returnvalue);
 			}
 
-			TEST_METHOD(on_zero) {
+			TEST_METHOD(on_negative_min)
+			{
+				//Arrange
+				const auto expected_returnvalue = true;
+				const auto input_value = Doubles.at(DD::negative_min);
+
+				//ACT
+				const auto actual_returnvalue = snct::is_finite(input_value);
+
+				//Assert
+				Assert::AreEqual(expected_returnvalue, actual_returnvalue);
+			}
+
+			TEST_METHOD(on_negative_denormalized_min)
+			{
+				//Arrange
+				const auto expected_returnvalue = true;
+				const auto input_value = Doubles.at(DD::negative_denormalized_min);
+
+				//ACT
+				const auto actual_returnvalue = snct::is_finite(input_value);
+
+				//Assert
+				Assert::AreEqual(expected_returnvalue, actual_returnvalue);
+			}
+
+			TEST_METHOD(on_zero)
+			{
 				//Arrange
 				const auto expected_returnvalue = true;
 				const auto input_value = Doubles.at(DD::zero);
 
-				//Act
-				auto actual_returnvalue = snct::is_finite(input_value);
+				//ACT
+				const auto actual_returnvalue = snct::is_finite(input_value);
 
 				//Assert
 				Assert::AreEqual(expected_returnvalue, actual_returnvalue);
 			}
 
-			TEST_METHOD(on_one) {
+			TEST_METHOD(on_one)
+			{
 				//Arrange
 				const auto expected_returnvalue = true;
 				const auto input_value = Doubles.at(DD::one);
 
-				//Act
-				auto actual_returnvalue = snct::is_finite(input_value);
+				//ACT
+				const auto actual_returnvalue = snct::is_finite(input_value);
 
 				//Assert
 				Assert::AreEqual(expected_returnvalue, actual_returnvalue);
@@ -593,54 +743,57 @@ namespace constexpr_math_function
 
 		TEST_CLASS(returns_false)
 		{
-			TEST_METHOD(on_signalling_NaN) {
+			TEST_METHOD(on_signalling_NaN)
+			{
 				//Arrange
 				const auto expected_returnvalue = false;
 				const auto input_value = Doubles.at(DD::signalling_NaN);
 
-				//Act
-				auto actual_returnvalue = snct::is_finite(input_value);
+				//ACT
+				const auto actual_returnvalue = snct::is_finite(input_value);
 
 				//Assert
 				Assert::AreEqual(expected_returnvalue, actual_returnvalue);
 			}
 
-			TEST_METHOD(on_quiet_NaN) {
+			TEST_METHOD(on_quiet_NaN)
+			{
 				//Arrange
 				const auto expected_returnvalue = false;
 				const auto input_value = Doubles.at(DD::quiet_NaN);
 
-				//Act
-				auto actual_returnvalue = snct::is_finite(input_value);
+				//ACT
+				const auto actual_returnvalue = snct::is_finite(input_value);
 
 				//Assert
 				Assert::AreEqual(expected_returnvalue, actual_returnvalue);
 			}
 
-			TEST_METHOD(on_positive_infinity) {
+			TEST_METHOD(on_positive_infinity)
+			{
 				//Arrange
 				const auto expected_returnvalue = false;
 				const auto input_value = Doubles.at(DD::positive_infinity);
 
-				//Act
-				auto actual_returnvalue = snct::is_finite(input_value);
+				//ACT
+				const auto actual_returnvalue = snct::is_finite(input_value);
 
 				//Assert
 				Assert::AreEqual(expected_returnvalue, actual_returnvalue);
 			}
 
-			TEST_METHOD(on_negative_infinity) {
+			TEST_METHOD(on_negative_infinity)
+			{
 				//Arrange
 				const auto expected_returnvalue = false;
 				const auto input_value = Doubles.at(DD::negative_infinity);
 
-				//Act
-				auto actual_returnvalue = snct::is_finite(input_value);
+				//ACT
+				const auto actual_returnvalue = snct::is_finite(input_value);
 
 				//Assert
 				Assert::AreEqual(expected_returnvalue, actual_returnvalue);
 			}
-
 		};
 	}
 }

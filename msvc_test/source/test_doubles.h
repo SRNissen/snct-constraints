@@ -6,33 +6,43 @@
 
 namespace {
 
-    enum class DD
-    {
-        signalling_NaN,
-        quiet_NaN,
-        positive_infinity,
-        negative_infinity,
-        positive_lowest,
-        negative_lowest,
-        minimum,
-        maximum,
-        zero,
-        one
-    };
+	enum class DD
+	{
+		signalling_NaN,
+		quiet_NaN,
 
-    auto const Doubles = std::unordered_map<DD, double>
-    {
-        {DD::signalling_NaN, std::numeric_limits<double>::signaling_NaN()},
-        {DD::quiet_NaN, std::numeric_limits<double>::quiet_NaN()},
-        {DD::positive_infinity, std::numeric_limits<double>::infinity()},
-        {DD::negative_infinity, std::numeric_limits<double>::infinity() * -1.0},
-        {DD::positive_lowest, std::numeric_limits<double>::lowest()},
-        {DD::negative_lowest, std::numeric_limits<double>::lowest() * -1.0},
-        {DD::minimum, std::numeric_limits<double>::min()},
-        {DD::maximum, std::numeric_limits<double>::max()},
-        {DD::zero, 0.0},
-        {DD::one, 1.0},
-    };
+		positive_infinity,
+		positive_max,
+		positive_min,
+		positive_denormalized_min,
+
+		negative_infinity,
+		negative_max,
+		negative_min,
+		negative_denormalized_min,
+
+		zero,
+		one
+	};
+
+	auto const Doubles = std::unordered_map<DD, double>
+	{
+		{DD::signalling_NaN, std::numeric_limits<double>::signaling_NaN()},
+		{DD::quiet_NaN, std::numeric_limits<double>::quiet_NaN()},
+		
+		{DD::positive_infinity, std::numeric_limits<double>::infinity()},
+		{DD::positive_max,std::numeric_limits<double>::max()},
+		{DD::positive_min,std::numeric_limits<double>::min()},
+		{DD::positive_denormalized_min,std::numeric_limits<double>::denorm_min()},
+		
+		{DD::negative_infinity, std::numeric_limits<double>::infinity() * -1.0},
+		{DD::negative_max,std::numeric_limits<double>::max() * -1.0},
+		{DD::negative_min,std::numeric_limits<double>::min() * -1.0},
+		{DD::negative_denormalized_min,std::numeric_limits<double>::denorm_min() * -1.0},
+		
+		{DD::zero, 0.0},
+		{DD::one, 1.0},
+	};
 }
 
 #endif
