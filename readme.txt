@@ -8,12 +8,13 @@ in `your_library.h`:
     namespace your
     {
         using Divisor = snct::Constrained<double, snct::Not<0.0>, snct::Finite>;
-        double inverse(Divisor);
+        
+        double inverse(Divisor d);
     }
 
 in `your_library.cpp`:
 
-    #include "math_functions.h"
+    #include "your_library.h"
     
     namespace your
     {
@@ -40,6 +41,6 @@ in user `main.cpp`:
             if(optional_divisor)
                 return inverse(*optional_divisor);
             else
-                return 0;
+                /*do your preferred non-exceptional error handling*/;
         }
     }
