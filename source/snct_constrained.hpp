@@ -107,13 +107,13 @@ namespace snct
 			constexpr static bool is_nothrow_check = ( std::is_nothrow_invocable_v<Cs,T> && ... );
 
             /** @brief checks all constraints and throws if one is false */
-            static void check_and_throw( T value )
+            constexpr static void check_and_throw( T value )
             {    
                 return ( ( Cs::is_satisfied(value) ? (void)0 : throw Constraint_Exception{ Cs::error_message() } ), ...);
             }
 
             /** @brief checks all constraints*/
-            static bool check( T value ) noexcept( is_nothrow_check )
+            constexpr static bool check( T value ) noexcept( is_nothrow_check )
             {
                 return ( Cs::is_satisfied(value) && ... );
             }
@@ -156,7 +156,7 @@ namespace snct
 
             /** @brief checks only those constraints that are not already subsumed in other_constraints... */
             template<typename ... other_constraints>
-            static void check_and_throw_parameters_if_not_already_subsumed( T value )
+            constexpr static void check_and_throw_parameters_if_not_already_subsumed( T value )
             {
                 return ( 
                     []( T value )
@@ -236,7 +236,7 @@ namespace snct
 		 * @throws Constraint_Exception if one of the constraints is not satisfied
 		 */
         template<typename ... other_constraints>
-        Constrained( const Constrained<T,other_constraints...>& other )
+        constexpr Constrained( const Constrained<T,other_constraints...>& other )
             : underlying_{ other.underlying_ }
         { 
             // this check actually only checks 'constraints...' (which are this->constraints ) if they are not subsumed in 'other_constraints...'
