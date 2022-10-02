@@ -151,6 +151,13 @@ namespace snct
 		static_assert( v1 <= v2, "The intersection of two constraints should not be empty" );
 	};
 
+	template<typename T, typename U>
+	struct constraint_relation
+	{
+		constexpr static bool equivalent = std::same_as<T, U>;
+	};
+
+
 }
 
 #endif //header guard

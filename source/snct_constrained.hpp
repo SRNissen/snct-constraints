@@ -200,10 +200,10 @@ namespace snct
     template<typename T, Constraint<T> ... constraints>
     class Constrained
     {
-        static_assert( sizeof...(constraints) > 0 );
+        //static_assert( sizeof...(constraints) > 0 );
     public:
         //nice little helper that holds all our checks as a pack
-        using checks = detail::make_normalized_check_pack<T,constraints...>::type;
+        //using checks = detail::make_normalized_check_pack<T,constraints...>::type;
 
         Constrained() = delete;
 
@@ -219,7 +219,8 @@ namespace snct
         constexpr Constrained( T t )
             : underlying_{t}
         {
-            checks::check_and_throw(t);
+            if constexpr (sizeof...(constraints) > 0)
+                detail::make_normalized_check_pack<T, constraints...>::type::check_and_throw(t);
         }
 
         template<typename U, Constraint<U> ... other_constraints>
@@ -241,7 +242,8 @@ namespace snct
         { 
             // this check actually only checks 'constraints...' (which are this->constraints ) if they are not subsumed in 'other_constraints...'
             // its a bit convoluted, but easiest to check this way around
-            Constrained<T,other_constraints...>::checks::template check_and_throw_parameters_if_not_already_subsumed<constraints...>( other.underlying_ );
+            if constexpr (sizeof...(constraints) > 0)
+                Constrained<T,other_constraints...>::checks::template check_and_throw_parameters_if_not_already_subsumed<constraints...>( other.underlying_ );
         }
 
 
@@ -251,17 +253,24 @@ namespace snct
 		 * @param value to check and hold
 		 * @return std::optional<Constrained> 
 		 */
-        [[nodiscard]] static constexpr std::optional<Constrained> factory( T value ) noexcept(checks::is_nothrow_check)
+        [[nodiscard]] static constexpr std::optional<Constrained> factory( T value ) noexcept(detail::make_normalized_check_pack<T, constraints...>::type::is_nothrow_check)
         {
-            const bool all_satisfied = checks::check( value );
-
-            if ( all_satisfied )
+            if constexpr (sizeof...(constraints) > 0)
             {
-                return Constrained{ value, Factoryparam{} };
+                const bool all_satisfied = detail::make_normalized_check_pack<T, constraints...>::type::check(value);
+
+                if (all_satisfied)
+                {
+                    return Constrained{ value, Factoryparam{} };
+                }
+                else
+                {
+                    return std::nullopt;
+                }
             }
             else
             {
-                return std::nullopt;
+                return Constrained{ value, Factoryparam{} };
             }
         }
 

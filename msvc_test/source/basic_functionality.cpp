@@ -3,7 +3,6 @@
 #include "test_constraints.h"
 #include <string_view>
 
-
 using namespace Microsoft::VisualStudio::CppUnitTestFramework;
 
 
