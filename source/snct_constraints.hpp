@@ -99,17 +99,24 @@ namespace snct
     struct constraint_relation< GreaterThan<v1>, Not<v2> >
     {
         constexpr static bool narrower = v1 >= v2; //"GreaterThan" is narrower than "Not" when this condition is true
+		constexpr static bool wider = !narrower;
+		constexpr static bool equivalent = false;
+
     };
 
     template<auto v1, auto v2>
     struct constraint_relation< LessThan<v1>, Not<v2> >
     {
         constexpr static bool narrower = v1 <= v2; 
+		constexpr static bool wider = !narrower;
+		constexpr static bool equivalent = false;
     };
 
     template<auto v1, auto v2>
     struct constraint_relation< Not<v1>, Not<v2> >
     {
+		constexpr static bool narrower = false;
+		constexpr static bool wider = false;
         constexpr static bool equivalent = v1 == v2; 
     };
 

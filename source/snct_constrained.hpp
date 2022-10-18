@@ -68,7 +68,7 @@ namespace snct
         template<typename C1, typename C2>
         struct normalized_relation
         {
-           constexpr static bool equivalent = is_equivalent<C1,C2> or is_equivalent<C2,C1>;
+           constexpr static bool equivalent = is_equivalent<C1,C2> || is_equivalent<C2,C1>;
            constexpr static bool narrower = is_narrower<C1,C2>;
            constexpr static bool wider = is_narrower<C2,C1>;
         };
