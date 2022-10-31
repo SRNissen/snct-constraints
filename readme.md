@@ -51,6 +51,7 @@ I would like to thank
 
 \* Assuming certain costs don't count ;)
 
+[Back to Index](#index)
 
 # Using constrained types
 
@@ -275,6 +276,8 @@ It is recommended - but not required - that your `is_satisfied` method is marked
 
 It is required that both `is_satisfied` and `error_message` are marked `noexcept`. This is also a requirement in code bases that can handle exceptions. It is up to the user whether they can, at this exact point in their code, handle an exception. If they can, they may call the public `snct::Constrained` constructor, which will handle any necessary throws. If they cannot handle exceptions, they are calling the `snct::Constrained::factory` method, which guarantees no exceptions will be thrown. In either case, a throw from `is_satisfied` is useless, and has thus been banned by the `Constraint` concept.
 
+[Back to Index](#index)
+
 # The benefits of constrained types
 
 It's Great.
@@ -367,18 +370,6 @@ You can just use a string view! Your function becomes so easy to write, it's alm
 ```
 
 Go watch Ben Deane's talk (link in the introduction) for more on this.
-
-
-
-
-
-
-
-
-
-
-
-
 
 ## Put constraints in code rather than documentation
 
@@ -477,6 +468,8 @@ But again, as with the performance impact, that *might* still see you ahead on b
 
 I must be honest here and say that I do not have a large code base without excpetions to test this on, so I cannot guarantee that binary sizes won't grow. There is reason to think they may, there is reason to think they will not. If you get the opportunity to try it out, please report back to me so I can update this section with and replace theorizing with facts.
 
+[Back to Index](#index)
+
 # Postscript: But Why Though?
 
 The original motivating example was a function like this:
@@ -544,3 +537,5 @@ With `snct::Constrained`, the legacy function declaration would look like this:
 ```
 
 Users who operate in a code base with constrained values won't have to go read the template, the `using` line says exactly what they need to pass into the function  *and* tells them there's a factory function available if they can't handle an exception.
+
+[Back to Index](#index)
