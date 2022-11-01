@@ -14,19 +14,19 @@ Introducing snct::Constrained<T>
 # Index
 
 * [Introduction](#introduction)
-  * Acknowledgements
+  * [Acknowledgements](#acknowledgements)
 * [Using constrained types](#using-constrained-types)
-  * With exceptions enabled
-  * Without using exceptions
+  * [With exceptions enabled](#with-exceptions-enabled)
+  * [Without using exceptions](#without-using-exceptions)
 * [Creating constrained types](#creating-constrained-types)
-  * The name
-  * The underlying type
-  * The constraints
+  * [The name](#the-name)
+  * [The underlying type](#the-underlying-type)
+  * [The constraints](#the-constraints)
 * [The benefits of constrained types](#the-benefits-of-constrained-types)
-  * Total and partial functions
-  * Put constraints in code rather than documentation
-  * Letting the user decide on error handling strategies
-  * Impacts on performance and binary size
+  * [Total and partial functions](#total-and-partial-functions)
+  * [Put constraints in code rather than documentation](#put-constraints-in-code-rather-than-documentation)
+  * [Letting the user decide on error handling strategies](#letting-the-user-decide-on-error-handling-strategies)
+  * [Impacts on performance and binary size](#impacts-on-performance-and-binary-size)
 * [Postscrip: But Why Though?](#postscript-but-why-though)
 
 # Introduction
