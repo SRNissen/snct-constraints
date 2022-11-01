@@ -27,7 +27,7 @@ Introducing snct::Constrained<T>
   * [Put constraints in code rather than documentation](#put-constraints-in-code-rather-than-documentation)
   * [Letting the user decide on error handling strategies](#letting-the-user-decide-on-error-handling-strategies)
   * [Impacts on performance and binary size](#impacts-on-performance-and-binary-size)
-* [Postscrip: But Why Though?](#postscript-but-why-though)
+* [Postscript: But Why Though?](#postscript-but-why-though)
 
 # Introduction
 
