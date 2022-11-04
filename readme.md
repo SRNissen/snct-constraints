@@ -77,7 +77,7 @@ If you have exceptions, this:
     constexpr double area(Dimension x, Dimension y) noexcept;
 ```
 
-should read and used exactly like this:
+should be read and used exactly like this:
 
 ```c++
     // Throws snct::Constraint_Exception if x or y are NaN or not greater than 0.0
