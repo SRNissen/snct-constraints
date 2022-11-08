@@ -24,15 +24,27 @@ namespace snct
     class Constrained
     {
     public:
+    // META
+        using Underlying = std::remove_reference_t<T>;
 
+    // ACCESS
+    
+        // implicit conversion to underlying
+        [[nodiscard]] constexpr operator Underlying const & () const { return underlying_; }
+    
+        // function call to underlying
+        [[nodiscard]] constexpr Underlying const & get() const { return underlying_; }
+        //using value = get;
+
+    // CONSTRUCTION
+
+        // Factory returns std::nullopt on constraint violation
+        [[nodiscard]] static constexpr std::optional<Constrained> factory(T t) noexcept;
+
+        // Constructor will throw Constraint_Exception unless all constraints are satisfied
         Constrained() = delete;
-
-        [[nodiscard]] constexpr operator T const & () const { return underlying_; }
-
-        constexpr Constrained(T t); // throws Constraint_Exception on constraint violation
-
-        [[nodiscard]] static constexpr std::optional<Constrained> factory(T t) noexcept; // returns std::nullopt on constraint violation
-
+        constexpr Constrained(T t);
+        
     private:
         class Factoryparam {};
         constexpr Constrained(T t, Factoryparam) : underlying_{ t } {};

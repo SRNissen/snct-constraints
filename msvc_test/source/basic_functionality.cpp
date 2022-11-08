@@ -248,7 +248,6 @@ namespace snct_constrained
 		}
 	};
 
-
 	TEST_CLASS(ctor_will_throw_snct_ConstraintException) {
 
 
@@ -356,7 +355,6 @@ namespace snct_constrained
 
 	};
 
-
 	TEST_CLASS(ctor_will_not_throw) {
 
 
@@ -411,7 +409,6 @@ namespace snct_constrained
 
 		}
 	};
-
 
 	TEST_CLASS(factory_returns_nullopt) {
 
@@ -496,5 +493,105 @@ namespace snct_constrained
 			// Assert
 			Assert::IsTrue(opt.has_value());
 		}
+	};
+
+	TEST_CLASS(will_provide_a_const_reference_to_the_underlying_value)
+	{
+		TEST_METHOD(implicitly_through_operator_T)
+		{
+			//arrange
+			int value = 0;
+			auto constrained_int = snct::Constrained<int>{value};
+
+			//act
+			int const& ref = constrained_int;
+
+			//assert
+			static_assert(std::is_reference_v<decltype(ref)>);
+		}
+
+		TEST_METHOD(through_method_named_get)
+		{
+			//arrange
+			int value = 0;
+			auto constrained_int = snct::Constrained<int>{ value };
+
+			//act
+			auto const& ref = constrained_int.get();
+
+			//assert
+			static_assert(std::is_reference_v<decltype(ref)>);
+		}
+	};
+
+	TEST_CLASS(will_provide_a_const_reference_to_the_underlying_reference)
+	{
+		TEST_METHOD(implicitly_through_operator_T)
+		{
+			//arrange
+			int value = 0;
+			auto constrained_int = snct::Constrained<int&>{ value };
+
+			//act
+			int const& ref = constrained_int;
+			++value;
+
+			//assert
+			static_assert(std::is_reference_v<decltype(ref)>);
+			Assert::AreEqual(value, ref);
+			Assert::IsTrue(std::addressof(value) == std::addressof(ref));
+		}
+
+		TEST_METHOD(through_method_named_get)
+		{
+			//arrange
+			int value = 0;
+			auto constrained_int = snct::Constrained<int&>{ value };
+
+			//act
+			auto const& ref = constrained_int.get();
+			++value;
+
+			//assert
+			static_assert(std::is_reference_v<decltype(ref)>);
+			Assert::AreEqual(value, ref);
+			Assert::IsTrue(std::addressof(value) == std::addressof(ref));
+		}
+	};
+
+	//NONE OF THE METHODS IN THIS TEST CLASS SHOULD COMPILE - ACQUIRING A REFERENCE-TO-NON-CONST-T THROUGH A CONSTRAINED-REFERENCE-TO-T IS ABSOLUTELY AGAINST THE PURPOSE OF THE WHOLE THING
+	TEST_CLASS(will_NOT_provide_a_NON_const_reference_through_the_underlying_reference)
+	{
+		//TEST_METHOD(implicitly_through_operator_T)
+		//{
+		//	//arrange
+		//	int value = 0;
+		//	auto constrained_int = snct::Constrained<int&>{ value };
+		//
+		//	//act
+		//	int & ref = constrained_int; //THIS LINE SHOULD NOT COMPILE
+		//	++ref;
+		//
+		//	//assert
+		//	static_assert(std::is_reference_v<decltype(ref)>);
+		//	Assert::AreEqual(value, ref);
+		//	Assert::IsTrue(std::addressof(value) == std::addressof(ref));
+		//}
+
+		//TEST_METHOD(through_method_named_get)
+		//{
+		//	//arrange
+		//	int value = 0;
+		//	auto constrained_int = snct::Constrained<int&>{ value };
+		//
+		//	//act
+		//	int & ref = constrained_int.get();  //THIS LINE SHOULD NOT COMPILE
+		//	++ref;
+		//
+		//	//assert
+		//	static_assert(std::is_reference_v<decltype(ref)>);
+		//	Assert::AreEqual(value, ref);
+		//	Assert::IsTrue(std::addressof(value) == std::addressof(ref));
+		//}
 	};
 }
