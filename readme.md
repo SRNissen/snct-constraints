@@ -86,7 +86,7 @@ should be read and used exactly like this:
 
 ### The happy path:
 
-A constrained type `snct::Constrained<T` is implicitly constructible from a `T`:
+A constrained type `snct::Constrained<T>` is implicitly constructible from a `T`:
 
 ```c++
     constexpr auto my_area = area(10.0, 20.0); // area = 200.0
