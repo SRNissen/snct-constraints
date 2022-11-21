@@ -210,7 +210,7 @@ My general advice is to use a value when the underlying type is small, a const r
 
 You can only constrain one type at a time, but of course that type can be a struct or tuple if you need multiple values.
 
-Once you have a `Constrained<T`, it is readily convertible to a `T`, letting you access the constrained value implicitly or explicitly:
+Once you have a `Constrained<T>`, it is readily convertible to a `T`, letting you access the constrained value implicitly or explicitly:
 
 ```c++
     using Divisor = snct::Constrained<double, Not<0.0>, Finite>;
