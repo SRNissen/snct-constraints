@@ -220,7 +220,7 @@ Once you have a `Constrained<T>`, it is readily convertible to a `T`, letting yo
     
     using Dimension = snct::Constrained<double, GreaterThan<0.0>, NotNaN>;
     constexpr double area(Dimension x, Dimension y) {
-        return (double)x * (double)y;
+        return double{x} * double{y};
     }
 ```
 
