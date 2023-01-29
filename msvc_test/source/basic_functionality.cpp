@@ -328,8 +328,8 @@ namespace snct_constrained
 			Assert::IsFalse(ctor_threw_other_exception);
 		}
 
-
-		TEST_METHOD(when_any_constraint_is_not_satisfied_even_if_the_last_constraint_is_satisfied) {
+		
+		TEST_METHOD(on_the_first_violated_constraint_even_if_later_constraints_are_satisfied) {
 
 			// Arrange
 			using ShouldThrowConstraintException = snct::Constrained<double, InvalidConstraint_One, ValidConstraint_One>;
@@ -454,7 +454,7 @@ namespace snct_constrained
 			Assert::IsFalse(opt.has_value());
 		}
 
-		TEST_METHOD(when_any_constraint_is_not_satisfied_even_if_the_last_constraint_is_satisfied) {
+		TEST_METHOD(on_the_first_violated_constraint_even_if_later_constraints_are_satisfied) {
 
 			// Arrange
 			using ShouldReturnNullopt = snct::Constrained<double, InvalidConstraint_One, ValidConstraint_One>;
