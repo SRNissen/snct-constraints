@@ -1,4 +1,4 @@
-name: test-action
+name: msvc-test
 
 on:
   workflow_dispatch:
@@ -6,25 +6,21 @@ on:
 
 jobs:
   test:
-    name: test-job
+    name: msvc-test
     runs-on: windows-latest
 
     steps:
      
-    - name: step-checkout
+    - name: checkout
       uses: actions/checkout@v4.1.7
 
-    - name: step-setup-dependencies
+    - name: setup dependencies
       uses: microsoft/setup-msbuild@v2
 
-    - name: step-build
+    - name: MSBuild
       run: MSBuild.exe msvc_test
 
-    - name: step-test
+    - name: vstest.console.exe
       run: |
         & 'C:\Program Files\Microsoft Visual Studio\2022\Enterprise\Common7\IDE\CommonExtensions\Microsoft\TestWindow\vstest.console.exe' D:\a\snct-constraints\snct-constraints\msvc_test\x64\Release\msvc_test.dll
-
         
-        #searchFolder: D:\a\snct-constraints\snct-constraints\msvc_test\x64\Release
-        #testAssembly: '**\\*test*.dll\n!**\\*TestAdapter.dll\n!**\\obj\\**' #msvc_test.dll
-        #runInParallel: true
