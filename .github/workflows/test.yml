@@ -13,5 +13,9 @@ jobs:
     - name: checkout
       uses: actions/checkout@v4.1.7
 
+    - name: dependencies
+      working-directory: tools
+      run: ./BuildTest.bat
+
     - name: build-test-project
-      run: msbuild.exe msvc_test
+      run: MSBuild.exe msvc_test
