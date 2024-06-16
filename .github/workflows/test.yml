@@ -17,19 +17,14 @@ jobs:
     - name: step-setup-dependencies
       uses: microsoft/setup-msbuild@v2
 
-    - name: discovery
-      run: |
-         pushd 'C:\Program Files\Microsoft Visual Studio\2022\Enterprise\'
-         gci -r vstest.console.exe
-
-
-
     - name: step-build
       run: MSBuild.exe msvc_test
 
     - name: step-test
-      uses: microsoft/vstest-action@v1.0.0
-      with:
-        searchFolder: D:\a\snct-constraints\snct-constraints\msvc_test\x64\Release
-        testAssembly: '**\\*test*.dll\n!**\\*TestAdapter.dll\n!**\\obj\\**' #msvc_test.dll
-        runInParallel: true
+      run: |
+        'C:\Program Files\Microsoft Visual Studio\2022\Enterprise\Common7\IDE\CommonExtensions\Microsoft\TestWindow\TestPlatform\vstest.console.exe' D:\a\snct-constraints\snct-constraints\msvc_test\x64\Release\msvc_test.dll
+
+        
+        #searchFolder: D:\a\snct-constraints\snct-constraints\msvc_test\x64\Release
+        #testAssembly: '**\\*test*.dll\n!**\\*TestAdapter.dll\n!**\\obj\\**' #msvc_test.dll
+        #runInParallel: true
