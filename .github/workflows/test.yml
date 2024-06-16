@@ -14,4 +14,4 @@ jobs:
       uses: actions/checkout@v4.1.7
 
     - name: build-test-project
-      run: msbuild msvc_test
+      run: msbuild.exe msvc_test
