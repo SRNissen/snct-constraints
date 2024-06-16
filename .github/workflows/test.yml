@@ -1,0 +1,16 @@
+name: test-action
+
+on:
+  workflow_dispatch:
+  push:
+
+jobs:
+  test:
+    name: test-job
+    runs-on: windows-latest
+
+    steps:
+    - name: checkout
+      uses: actions/checkout@v4.1.7
+    - name: test-step
+      run: gci
