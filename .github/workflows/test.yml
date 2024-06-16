@@ -11,10 +11,7 @@ jobs:
 
     steps:
     - name: discovery
-      run: |
-          pushd c:
-          pwd
-          gci -r *.exe
+      run: where.exe vstest.console.exe
       
     - name: step-checkout
       uses: actions/checkout@v4.1.7
