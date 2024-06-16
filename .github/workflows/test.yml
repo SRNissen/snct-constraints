@@ -10,14 +10,15 @@ jobs:
     runs-on: windows-latest
 
     steps:
-    - name: checkout
+    - name: step-checkout
       uses: actions/checkout@v4.1.7
 
-    - name: dependencies
+    - name: step-setup-dependencies
       uses: microsoft/setup-msbuild@v2
 
-    - name: build-test-project
+    - name: step-build
       run: MSBuild.exe msvc_test
 
-    - name: discovery
-      run: gci -r
+    - name: step-test
+      working-directory: D:\a\snct-constraints\snct-constraints\msvc_test\x64\Release
+      run: vstest.console.exe msvc_test.dll
