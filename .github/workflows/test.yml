@@ -12,5 +12,6 @@ jobs:
     steps:
     - name: checkout
       uses: actions/checkout@v4.1.7
-    - name: test-step
-      run: gci
+
+    - name: build-test-project
+      run: msbuild msvc_test
