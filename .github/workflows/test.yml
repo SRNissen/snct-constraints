@@ -18,10 +18,7 @@ jobs:
       uses: microsoft/setup-msbuild@v2
 
     - name: discovery1
-      run: cd 'C:\Program Files\Microsoft Visual Studio\2022\Enterprise\'
-
-    - name: discovery2
-      run: ls
+      run: ls 'C:\Program Files\Microsoft Visual Studio\2022\Enterprise\'
 
     - name: step-build
       run: MSBuild.exe msvc_test
