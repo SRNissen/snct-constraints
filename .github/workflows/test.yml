@@ -20,5 +20,8 @@ jobs:
       run: MSBuild.exe msvc_test
 
     - name: step-test
-      working-directory: D:\a\snct-constraints\snct-constraints\msvc_test\x64\Release
-      run: vstest.console.exe msvc_test.dll
+      uses: microsoft/vstest-action@v1.0.0
+      with:
+        searchFolder: D:\a\snct-constraints\snct-constraints\msvc_test\x64\Release
+        testAssembly: msvc_test.dll
+        runInParallel: true
