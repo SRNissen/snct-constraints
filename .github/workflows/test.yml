@@ -22,7 +22,7 @@ jobs:
 
     - name: step-test
       run: |
-        'C:\Program Files\Microsoft Visual Studio\2022\Enterprise\Common7\IDE\CommonExtensions\Microsoft\TestWindow\TestPlatform\vstest.console.exe' D:\a\snct-constraints\snct-constraints\msvc_test\x64\Release\msvc_test.dll
+        & 'C:\Program Files\Microsoft Visual Studio\2022\Enterprise\Common7\IDE\CommonExtensions\Microsoft\TestWindow\TestPlatform\vstest.console.exe' D:\a\snct-constraints\snct-constraints\msvc_test\x64\Release\msvc_test.dll
 
         
         #searchFolder: D:\a\snct-constraints\snct-constraints\msvc_test\x64\Release
