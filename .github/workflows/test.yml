@@ -18,7 +18,9 @@ jobs:
       uses: microsoft/setup-msbuild@v2
 
     - name: discovery
-      run: where.exe msbuild.exe
+      run: |
+         pushd C:\Program Files\Microsoft Visual Studio\2022\Enterprise\
+         gci -r vstest.console.exe
 
 
 
