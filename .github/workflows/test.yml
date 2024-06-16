@@ -12,6 +12,7 @@ jobs:
     steps:
     - name: discovery
       run: |
+          pushd c:
           pwd
           gci -r *.exe
       
