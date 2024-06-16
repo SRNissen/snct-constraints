@@ -17,8 +17,11 @@ jobs:
     - name: step-setup-dependencies
       uses: microsoft/setup-msbuild@v2
 
+    - name: discovery2
+      run: gci -r 'C:\Program Files\Microsoft Visual Studio\2022\Enterprise\*.exe'
+
     - name: discovery1
-      run: ls 'C:\Program Files\Microsoft Visual Studio\2022\Enterprise\'
+      run: gci -r 'C:\Program Files\Microsoft Visual Studio\2022\Enterprise\Common7\IDE\CommonExtensions\Microsoft\TestWindow\TestPlatform\'
 
     - name: step-build
       run: MSBuild.exe msvc_test
