@@ -19,7 +19,7 @@ jobs:
 
     - name: discovery
       run: |
-         pushd C:\Program Files\Microsoft Visual Studio\2022\Enterprise\
+         pushd 'C:\Program Files\Microsoft Visual Studio\2022\Enterprise\'
          gci -r vstest.console.exe
 
 
